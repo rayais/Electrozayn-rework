@@ -43,19 +43,19 @@ const ProductTable = () => {
             field: "id",
             headerName: "Product ID",
             minWidth: 100,
-            flex: 0.5,
+            flex: 0,
         },
         {
             field: "name",
             headerName: "Nom",
             minWidth: 100,
-            flex: 3,
+            flex: 2,
         },
         {
             field: "image",
             headerName: "Image",
-            minWidth: 200,
-            flex: 1,
+            minWidth: 100,
+            flex: 0,
             renderCell: (params) => {
                 return (
                     <div className="flex items-center gap-2">
@@ -71,7 +71,7 @@ const ProductTable = () => {
             field: "category",
             headerName: "Category",
             minWidth: 100,
-            flex: 2,
+            flex: 0,
         },
         {
             field: "stock",
@@ -80,7 +80,7 @@ const ProductTable = () => {
             headerAlign: "left",
             align: "left",
             minWidth: 70,
-            flex: 0.1,
+            flex: 0,
             renderCell: (params) => {
                 return (
                     <>
@@ -97,15 +97,29 @@ const ProductTable = () => {
         },
         {
             field: "price",
-            headerName: "Price",
+            headerName: "Prix",
             type: "number",
             minWidth: 100,
             headerAlign: "left",
             align: "left",
-            flex: 0.2,
+            flex: 0,
             renderCell: (params) => {
                 return (
                     <span>TND {params.row.price}</span>
+                );
+            },
+        },
+        {
+            field: "Promo Price",
+            headerName: "Prix PROMO",
+            type: "number",
+            minWidth: 100,
+            headerAlign: "left",
+            align: "left",
+            flex: 0,
+            renderCell: (params) => {
+                return (
+                    <span style={{backgroundColor: 'green', color: 'white', width: 70}}>TND {params.row.promo}</span>
                 );
             },
         },
@@ -134,6 +148,7 @@ const ProductTable = () => {
             category: item.catigory,
             stock: item.stockquantity,
             price: item.Origin_price,
+            promo: item.Promo_price
         });
     });
 

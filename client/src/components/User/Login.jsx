@@ -24,7 +24,7 @@ const Login = () => {
         dispatch(loginUser(Email, Password));
     }
 
-    const redirect = location.search ? location.search.split("=")[1] : "";
+    const redirect = location.search ? location.search.split("=")[1] : "account";
 
     useEffect(() => {
         if (error) {
@@ -40,7 +40,7 @@ const Login = () => {
         <>
             <MetaData title="Electrozayn - Le monde des composants électronique et de l'électronique Tunisie" />
 
-            {loading && <BackdropLoader />}
+            {/* {loading && <BackdropLoader />} */}
             <main className="w-full mt-12 sm:pt-20 sm:mt-0">
 
                 {/* <!-- row --> */}

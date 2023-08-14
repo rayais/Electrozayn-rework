@@ -51,19 +51,21 @@ LoginUser :(req,res)=>{
   
   // var repeatepasswordHshed=crypto.createHash('sha256').update(req.body.repeatepassword, 'utf8').digest('hex')
   const query=`SELECT * from user where Email="${req.body.Email}"`
-  connection.query(query,(err,results)=>{
-    if(err){
-      res.status(500).send(err)
-    } else if(results.length>0 && results[0].Password===passwordHashed ){
-     var session=utils.RandomString(32)
-      middleware.CreateSession(req,res,results[0].id,session)
-    }else if(results.length===0 || results[0].Password!==passwordHashed  ){
-           res.status(200).send('somthing went wrong')
-    }else{
-      res.status(404).send("not fund")
+  connection.query(query, async (err, results) => {
+      if (results.length === 0) {
+        res.status(201).json({ success: false, message: 'Email not found' });
+    } else if (results[0].Password !== passwordHashed) {
+        res.status(201).json({ success: false, message: 'Incorrect password' });
+    } else {
+        try {
+            var session = utils.RandomString(32);
+            const registerInfo = await middleware.CreateSession(req, res, results[0].id, results, session);
+            // Only send one response
+        } catch (err) {
+            res.status(500).json({ success: false, error: err.message });
+        }
     }
-  })
-},
+})},
 logout:(req,res)=>{
   session.delete(req.cookies.Electrozyne)
   .then((result)=>{

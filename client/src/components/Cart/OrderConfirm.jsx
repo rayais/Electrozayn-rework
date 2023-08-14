@@ -9,11 +9,11 @@ import { useEffect } from 'react';
 import { emptyCart } from '../../actions/cartAction';
 import { newOrder } from '../../actions/orderAction';
 
-const OrderConfirm = ({user}) => {
+const OrderConfirm = () => {
 
     const navigate = useNavigate();
     const { shippingInfo, cartItems } = useSelector((state) => state.cart);
-
+    const { user } = useSelector(state => state.user)
     const { loading: orderLoading, order, error: orderError } = useSelector((state) => state.newOrder);
     const user_id = user.id
     const dispatch = useDispatch();
@@ -68,7 +68,7 @@ const OrderConfirm = ({user}) => {
                             ))}
                         </div>
                         <div className="flex justify-between items-center mt-4 bg-white px-6 py-3 rounded-b-sm">
-                            <p className="text-sm">La confirmation de la commande sera envoyé vers <span className="font-medium">{user.Email}</span></p>
+                            <p className="text-sm">La confirmation de la commande sera envoyé vers <span className="font-medium">{user.session[0].Email}</span></p>
                             <button onClick={handleConfirm} className="bg-primary-orange px-6 py-2 text-white font-medium rounded-sm shadow hover:shadow-lg uppercase">continue</button>
                         </div>
                     </Stepper>

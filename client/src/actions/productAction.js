@@ -171,7 +171,7 @@ export const createProduct = (productData) => async (dispatch) => {
     try {
         dispatch({ type: NEW_PRODUCT_REQUEST });
         const config = { header: { "Content-Type": "application/json" } }
-        const { data } = await axios.post("http://localhost:4000/api/v1/admin/product/new", productData, config);
+        const { data } = await axios.post("https://www.electrozayn.com/api/Create/New/product", productData, config);
 
         dispatch({
             type: NEW_PRODUCT_SUCCESS,
@@ -208,11 +208,11 @@ export const updateProduct = (id, productData) => async (dispatch) => {
 export const deleteProduct = (id) => async (dispatch) => {
     try {
         dispatch({ type: DELETE_PRODUCT_REQUEST });
-        const { data } = await axios.delete(`http://localhost:4000/api/v1/admin/product/${id}`);
+        const { data } = await axios.delete(`https://www.electrozayn.com/api/delete/product/${id}`);
 
         dispatch({
             type: DELETE_PRODUCT_SUCCESS,
-            payload: data.success,
+            payload: data,
         });
     } catch (error) {
         dispatch({

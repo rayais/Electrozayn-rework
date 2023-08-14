@@ -85,7 +85,8 @@ const OrderTable = () => {
           total_price: 0, // Initialize total_price
           products: [],
           status : order.validate_add_or_not,
-          phone : order.PhoneNumber // Initialize products array
+          phone : order.PhoneNumber,
+          date: order.date // Initialize products array
         };
       }
     
@@ -107,20 +108,20 @@ const OrderTable = () => {
             field: "id",
             headerName: "Order ID",
             minWidth: 10,
-            flex: 0.1,
+            flex: 0,
         },
         {
             field: "userName",
             headerName: "User",
             type: "text",
-            minWidth: 100,
-            flex: 0.1,
+            minWidth: 50,
+            flex: 0,
         },
         {
             field: 'status',
             headerName: 'Status',
             minWidth: 100,
-            flex: 0.1,
+            flex: 0,
             renderCell: (params) => {
                 return (
                     <span className={'text-sm p-1 px-2 font-medium rounded-full '}>
@@ -148,21 +149,21 @@ const OrderTable = () => {
             field: "email",
             headerName: "Email",
             type: "emailnumber",
-            minWidth: 150,
-            flex: 0.1,
+            minWidth: 160,
+            flex: 0,
         },
         {
             field: "product",
             headerName: "Product",
             type: "text",
-            minWidth: 220,
-            flex: 0,
+            minWidth: 250,
+            flex: 0.1,
             renderCell: (params) => (
                 <Tooltip title={params.row.products?.map(product => product.productName).join(", ")}>
             <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                 {params.row.products?.map((product, index) => (
                     <div key={index}>
-                        {product.productName} - Quantity: {product.product_quantity}
+                        {product.productName}
                     </div>
                 ))}
             </div>
@@ -183,16 +184,23 @@ const OrderTable = () => {
         },
         {
             field: "phone",
-            headerName: "PhoneDate",
+            headerName: "Phone",
             type: "number",
             minWidth: 50,
-            flex: 0.1,
+            flex: 0,
+        },
+        {
+            field: "date",
+            headerName: "Date",
+            type: "number",
+            minWidth: 50,
+            flex: 0,
         },
         {
             field: "actions",
             headerName: "Actions",
             minWidth: 100,
-            flex: 0.1,
+            flex: 0,
             type: "number",
             sortable: false,
             renderCell: (params) => {

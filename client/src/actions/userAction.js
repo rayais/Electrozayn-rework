@@ -44,25 +44,33 @@ export const loginUser = (Email, Password) => async (dispatch) => {
 
         dispatch({ type: LOGIN_USER_REQUEST });
 
-
         const { data } = await axios.post(
-            'https://www.electrozayn.com/api/electrozayn/login',
+            'http://localhost:5500/api/electrozayn/login', //changed api//
             { Email, Password },
         );
 
-        dispatch({
-            type: LOGIN_USER_SUCCESS,
-            payload: data.user,
-        });
+        if (data.success === true) {
+            // Successful login
+            dispatch({
+                type: LOGIN_USER_SUCCESS,
+                payload: data,
+            });
 
-        localStorage.setItem("token", data[0]);
-        localStorage.setItem("id", data[2]);
+            localStorage.setItem("token", data[0]);
+            localStorage.setItem("id", data[2]);
+        } else {
+            // Unsuccessful login
+            dispatch({
+                type: LOGIN_USER_FAIL,
+                payload: data.message, // Assuming data.message contains the error message
+            });
+        }
 
 
     } catch (error) {
         dispatch({
             type: LOGIN_USER_FAIL,
-            payload: error.response.data.message,
+            payload: data.message,
         });
     }
 };
@@ -72,10 +80,17 @@ export const registerUser = (userData) => async (dispatch) => {
    
     try {
 
+
         dispatch({ type: REGISTER_USER_REQUEST });
 
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+            },
+        }
+
         const { data } = await axios.post(
-            'https://www.electrozayn.com/api/Create_user/electrozayn',
+            'https://www.electrozayn.com/api/Create_user/electrozayn', config,
             userData,
         );
 
@@ -96,14 +111,18 @@ export const registerUser = (userData) => async (dispatch) => {
 };
 
 // Load User
-export const loadUser = (user_id) => async (dispatch) => {
+export const loadUser = (user_data) => async (dispatch) => {
 
     try {
 
         dispatch({ type: LOAD_USER_REQUEST });
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+            },
+        }
 
-        const { data } = await axios.get('http://localhost:5500/api/user/getone/', user_id);
-        
+        const { data } = await axios.get('http://localhost:5500/api/user/getone/',config, user_id);
 
         dispatch({
             type: LOAD_USER_SUCCESS,

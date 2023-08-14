@@ -4,7 +4,7 @@ import CheckIcon from '@mui/icons-material/Check';
 const Stepper = ({ activeStep, children, user }) => {
 
     const { shippingInfo, cartItems } = useSelector((state) => state.cart);
-
+    
     const address = `${shippingInfo.address}, ${shippingInfo.city}, ${shippingInfo.state} - ${shippingInfo.pincode}`;
 
     const steps = [

@@ -13,21 +13,21 @@ import { useNavigate } from 'react-router-dom';
 import MetaData from '../Layouts/MetaData';
 import states from '../../utils/states';
 
-const Shipping = ({user}) => {
+const Shipping = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { enqueueSnackbar } = useSnackbar();
-
+    const { user } = useSelector(state => state.user)
     const { cartItems } = useSelector((state) => state.cart);
     const { shippingInfo } = useSelector((state) => state.cart);
 
     const [address, setAddress] = useState();
-    const [email, setEmail] = useState(user.Email);
+    const [email, setEmail] = useState(user?.session[0].Email);
     const [country, setCountry] = useState("");
     const [state, setState] = useState("");
     const [pincode, setPincode] = useState(null);
-    const [phoneNo, setPhoneNo] = useState(user.PhoneNumber);
+    const [phoneNo, setPhoneNo] = useState(user.session[0].PhoneNumber);
     const itemPrice = cartItems.length > 0 ? (cartItems[0]?.cuttedPrice || cartItems[0].price) : 0;
     const shippingSubmit = (e) => {
         e.preventDefault();
@@ -66,7 +66,7 @@ const Shipping = ({user}) => {
                                     />
 
                                     <TextField
-                                        value={user.Email}
+                                        value={email}
                                         fullWidth
                                         label="Email"
                                         variant="outlined"

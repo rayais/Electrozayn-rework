@@ -7,11 +7,11 @@ import MinCategory from '../Layouts/MinCategory';
 import MetaData from '../Layouts/MetaData';
 import Categories from '../Layouts/Categories';
 
-const Account = ({user, role}) => {
+const Account = () => {
 
     const navigate = useNavigate();
 
-    const { loading, isAuthenticated } = useSelector(state => state.user)
+    const { loading, isAuthenticated, user } = useSelector(state => state.user)
 
     useEffect(() => {
         if (isAuthenticated === false) {
@@ -46,7 +46,7 @@ const Account = ({user, role}) => {
                                         <div className="flex flex-col sm:flex-row items-center gap-3" id="personalInputs">
                                             <div className="flex flex-col gap-0.5 w-64 px-3 py-1.5 rounded-sm border inputs cursor-not-allowed bg-gray-100 focus-within:border-primary-blue">
                                                 <label className="text-xs text-gray-500">Nom</label>
-                                                <label className="text-sm outline-none border-none cursor-not-allowed text-gray-500" aria-disabled>{user.FirstName}</label>
+                                                <label className="text-sm outline-none border-none cursor-not-allowed text-gray-500" aria-disabled>{user?.session[0].FirstName}</label>
                                             </div>
                                             {/* <div className="flex flex-col gap-0.5 w-64 px-3 py-1.5 rounded-sm border inputs cursor-not-allowed bg-gray-100 focus-within:border-primary-blue">
                                                 <label className="text-xs text-gray-500">Prénom</label>
@@ -65,7 +65,7 @@ const Account = ({user, role}) => {
                                         <div className="flex items-center gap-3">
                                             <div className="flex flex-col gap-0.5 sm:w-64 px-3 py-1.5 rounded-sm border bg-gray-100 cursor-not-allowed focus-within:border-primary-blue">
                                                 <label className="text-xs text-gray-500">Addresse Email</label>
-                                                <label type="email"  className="text-sm outline-none border-none cursor-not-allowed text-gray-500" >{user.Email}</label>
+                                                <label type="email"  className="text-sm outline-none border-none cursor-not-allowed text-gray-500" >{user?.session[0].Email}</label>
                                             </div>
                                         </div>
 
@@ -80,7 +80,7 @@ const Account = ({user, role}) => {
                                         <div className="flex items-center gap-3">
                                             <div className="flex flex-col gap-0.5 sm:w-64 px-3 py-1.5 rounded-sm border bg-gray-100 cursor-not-allowed focus-within:border-primary-blue">
                                                 <label className="text-xs text-gray-500">Numéro de téléphone</label>
-                                                <label type='number'  className="text-sm outline-none border-none cursor-not-allowed text-gray-500" >{user.PhoneNumber}</label>
+                                                <label type='number'  className="text-sm outline-none border-none cursor-not-allowed text-gray-500" >{user?.session[0].PhoneNumber}</label>
                                             </div>
                                         </div>
 
@@ -95,7 +95,7 @@ const Account = ({user, role}) => {
                                         <div className="flex items-center gap-3">
                                             <div className="flex flex-col gap-0.5 sm:w-64 px-3 py-1.5 rounded-sm border bg-gray-100 cursor-not-allowed focus-within:border-primary-blue">
                                                 <label className="text-xs text-gray-500">Adresse</label>
-                                                <label type='number'  className="text-sm outline-none border-none cursor-not-allowed text-gray-500" >{user.Address}</label>
+                                                <label type='number'  className="text-sm outline-none border-none cursor-not-allowed text-gray-500" >{user?.session[0].Address}</label>
                                             </div>
                                         </div>
 

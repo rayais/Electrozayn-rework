@@ -4,7 +4,7 @@ import { addItemsToCart } from '../../../actions/cartAction';
 import { enqueueSnackbar } from 'notistack';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
-const Product = ({id, product_image, product_name, offer, tag, Origin_price, cuttedPrice }) => {
+const Product = ({id, product_image, product_name, offer, tag, Origin_price, Promo_price }) => {
 
     
     return (
@@ -14,8 +14,8 @@ const Product = ({id, product_image, product_name, offer, tag, Origin_price, cut
                 <img draggable="false" className="w-full h-full object-fill" src={product_image} alt={product_name} />
             </div>
             <h2 className="font-medium text-sm mt-2">{product_name}</h2>
-            {/* <span className="text-gray-500 line-through text-xs">TND {cuttedPrice.toLocaleString()}</span> */}
-            <span className='font-bold text-red-500 '>TND {Origin_price.toLocaleString()}</span>
+            {/* <span className="text-gray-500 line-through text-xs">TND {Origin_price? Origin_price.toLocaleString() : Promo_price.toLocaleString()}</span> */}
+            <span className='font-bold text-red-500 '>TND {Promo_price? Promo_price.toLocaleString() : Origin_price.toLocaleString()}</span>
             </Link>
         </>
     );

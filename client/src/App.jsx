@@ -46,16 +46,16 @@ function App() {
   const [user, setUser] = useState({});
   const [role, setRole] = useState("");
   
-  useEffect(() => {
-    if (user_id) {
-    axios
-      .get("https://www.electrozayn.com/api/user/getone/" + user_id)
-      .then((res) => {
-        setUser(res.data[0]);
-        setRole(res.data[0].role)
-      }) 
-    };
-  }, [user_id]);
+  // useEffect(() => {
+  //   if (user_id) {
+  //   axios
+  //     .get("https://www.electrozayn.com/api/user/getone/" + user_id)
+  //     .then((res) => {
+  //       setUser(res.data[0]);
+  //       setRole(res.data[0].role)
+  //     }) 
+  //   };
+  // }, [user_id]);
 
   useEffect(() => {
     WebFont.load({
@@ -88,7 +88,7 @@ function App() {
   
   return (
     <>
-      <Header user={user} role={role}/>
+      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
@@ -103,7 +103,7 @@ function App() {
         {/* order process */}
         <Route path="/shipping" element={
           <ProtectedRoute>
-            <Shipping user={user} role={role}/>
+            <Shipping />
           </ProtectedRoute>
         } ></Route>
 
@@ -135,7 +135,7 @@ function App() {
 
         <Route path="/account" element={
           <ProtectedRoute>
-            <Account user={user} role={role}/>
+            <Account />
           </ProtectedRoute>
         } ></Route>
 
@@ -162,23 +162,23 @@ function App() {
         } ></Route>
 
         <Route path="/admin/dashboard" element={
-          <ProtectedRoute isAdmin={true} role={role}>
-            <Dashboard activeTab={0} user={user} role={role}>
-              <MainData user={user} role={role}/>
+          <ProtectedRoute isAdmin={true} >
+            <Dashboard activeTab={0} >
+              <MainData />
             </Dashboard>
           </ProtectedRoute>
         } ></Route>
 
         <Route path="/admin/orders" element={
-          <ProtectedRoute isAdmin={true} role={role}>
+          <ProtectedRoute isAdmin={true} >
             <Dashboard activeTab={1}>
-              <OrderTable user={user} />
+              <OrderTable />
             </Dashboard>
           </ProtectedRoute>
         } ></Route>
 
         <Route path="/admin/order/:id" element={
-          <ProtectedRoute isAdmin={true} role={role}>
+          <ProtectedRoute isAdmin={true} >
             <Dashboard activeTab={1}>
               <UpdateOrder />
             </Dashboard>
@@ -186,7 +186,7 @@ function App() {
         } ></Route>
 
         <Route path="/admin/products" element={
-          <ProtectedRoute isAdmin={true} role={role}>
+          <ProtectedRoute isAdmin={true} >
             <Dashboard activeTab={2}>
               <ProductTable />
             </Dashboard>
@@ -194,7 +194,7 @@ function App() {
         } ></Route>
 
         <Route path="/admin/new_product" element={
-          <ProtectedRoute isAdmin={false} role={role}> 
+          <ProtectedRoute isAdmin={false} > 
             <Dashboard activeTab={3} >
               <NewProduct />
             </Dashboard>
@@ -202,7 +202,7 @@ function App() {
         } ></Route>
 
         <Route path="/admin/product/:id" element={
-          <ProtectedRoute isAdmin={true} role={role}>
+          <ProtectedRoute isAdmin={true} >
             <Dashboard activeTab={2}>
               <UpdateProduct />
             </Dashboard>
@@ -210,7 +210,7 @@ function App() {
         } ></Route>
 
         <Route path="/admin/users" element={
-          <ProtectedRoute isAdmin={true} role={role}>
+          <ProtectedRoute isAdmin={true} >
             <Dashboard activeTab={4}>
               <UserTable />
             </Dashboard>
