@@ -6,6 +6,7 @@ module.exports={
             const registerInfo = {
                 user_id: result.user_id,
                 session: result.session,
+                token: session
             };
 
             res.cookie("Electrozyne", session, {

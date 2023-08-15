@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -6,26 +6,50 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
+import Print from '@mui/icons-material/Print';
+import ToPrint from '../ToPrint/ToPrint';
+import ReactToPrint from 'react-to-print';
 
-const Actions = ({ id, deleteHandler, name, editRoute }) => {
-
+const Actions = ({ id, deleteHandler, name, editRoute, rowData}) => {
+    
     const [open, setOpen] = useState(false);
-
     const handleClose = () => {
         setOpen(false);
     };
 
+    const componentRef = React.createRef();
+    const [printVisible, setPrintVisible] = useState(false)
+
     return (
         <>
             <div className="flex justify-between items-center gap-3">
-                {editRoute !== "review" && (
+                {editRoute !== "order" ? (
                     <Link to={`/admin/${editRoute}/${id}`} className="text-blue-600 hover:bg-blue-200 p-1 rounded-full bg-blue-100">
                         <EditIcon />
                     </Link>
-                )}
+                ) : 
+                <>
+                <ReactToPrint // Wrap the component you want to print with ReactToPrint
+                    trigger={() => (
+                        
+                        <button onClick={() => setPrintVisible(true)} className="text-green-600 hover:bg-green-200 p-1 rounded-full bg-green-100">
+                            <Print />
+                        </button>
+                    )}
+                    content={() => componentRef.current} // Set the content to be printed
+                    />
+                    <div className={!printVisible ? 'print-hidden' : '' } >
+                        <div ref={componentRef}>
+                            <ToPrint rowData={rowData}/>
+                        </div>
+                    </div>
+                </>
+                }
                 <button onClick={() => setOpen(true)} className="text-red-600 hover:bg-red-200 p-1 rounded-full bg-red-100">
                     <DeleteIcon />
                 </button>
+                    
+                
             </div>
 
             <Dialog

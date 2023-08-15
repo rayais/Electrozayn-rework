@@ -63,6 +63,7 @@ const Cart = () => {
                     {/* <!-- cart column --> */}
 
                     <PriceSidebar cartItems={cartItems} />
+                    
 
                 </div>
                 {/* <!-- row --> */}

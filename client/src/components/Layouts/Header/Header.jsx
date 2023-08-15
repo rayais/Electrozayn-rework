@@ -20,11 +20,6 @@ const Header = () => {
 
   const [togglePrimaryDropDown, setTogglePrimaryDropDown] = useState(false);
   const [toggleSecondaryDropDown, setToggleSecondaryDropDown] = useState(false);
-
-  
-
- 
-
   return (
 
     <header className="bg-primary-blue fixed top-0 py-2.5 w-full z-10">
@@ -48,7 +43,7 @@ const Header = () => {
           {isAuthenticated === false ?
             <Link to="/login" className="px-3 sm:px-9 py-0.5 text-primary-blue bg-white border font-medium rounded-sm cursor-pointer">Connexion</Link>
             :
-            (
+            (   
                 <span className="userDropDown flex items-center text-white font-medium gap-1 cursor-pointer" onClick={() => setTogglePrimaryDropDown(!togglePrimaryDropDown)}>{user?.session[0].FirstName}
                   <span>{togglePrimaryDropDown ? <ExpandLessIcon sx={{ fontSize: "16px" }} /> : <ExpandMoreIcon sx={{ fontSize: "16px" }} />}</span>
                 </span>
@@ -66,7 +61,7 @@ const Header = () => {
                 {cartItems.length}
               </div>
             }
-            Panier
+            <span className='sm:inline hidden'>Panier</span>
           </Link>
         </div>
         {/* <!-- right navs --> */}

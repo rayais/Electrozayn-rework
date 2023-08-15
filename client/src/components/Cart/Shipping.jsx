@@ -28,7 +28,12 @@ const Shipping = () => {
     const [state, setState] = useState("");
     const [pincode, setPincode] = useState(null);
     const [phoneNo, setPhoneNo] = useState(user.session[0].PhoneNumber);
-    const itemPrice = cartItems.length > 0 ? (cartItems[0]?.cuttedPrice || cartItems[0].price) : 0;
+
+    const itemPrice = cartItems.reduce((total, item) => {
+        const price = item.cuttedPrice !== undefined ? item.cuttedPrice : item.price;
+        return total + price;
+    }, 0);
+    
     const shippingSubmit = (e) => {
         e.preventDefault();
 
@@ -102,17 +107,10 @@ const Shipping = () => {
                                             fullWidth
                                             required
                                         />
-                                        <TextField
-                                            label="PRIX"
-                                            value={itemPrice}
-                                            fullWidth
-                                            variant="outlined"
-                                            required
-                                        />
                                     </div>
 
 
-                                    <button type="submit" className="bg-primary-orange w-full sm:w-1/3 my-2 py-3.5 text-sm font-medium text-white shadow hover:shadow-lg rounded-sm uppercase outline-none">save and deliver here</button>
+                                    <button type="submit" className="bg-primary-orange w-full sm:w-1/3 my-2 py-3.5 text-sm font-medium text-white shadow hover:shadow-lg rounded-sm uppercase outline-none">CONFIRMER</button>
                                 </form>
                             </div>
                         </Stepper>

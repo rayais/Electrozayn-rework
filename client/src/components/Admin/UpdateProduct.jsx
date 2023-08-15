@@ -34,7 +34,6 @@ const UpdateProduct = () => {
     const [catigory, setCatigory] = useState('');
     const [productImage, setProductImage] = useState([]);
 
-    console.log(productImage)
 
     useEffect(() => {
         if (product) {
@@ -209,7 +208,7 @@ type='text'
         }}
         name="stockquantity"
         value={stockquantity}
-        onChange={(e) => setstockquantity(e.target.value)}
+        onChange={(e) => setStockquantity(e.target.value)}
     />
 </div>
 
@@ -232,9 +231,8 @@ type='text'
                         type="file"
                         // label="Product Image"
                         // value={productImage}
-                        onChange={(e) => setProductImage(e.target.files[0])}
+                        onChange={(e) => setProductImage(e.target.files.item[0])}
                         />
-                        {console.log(productImage)}
                         Choose Files
                     </label>
 

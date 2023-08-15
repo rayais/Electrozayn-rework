@@ -30,14 +30,6 @@ const PrimaryDropDownMenu = ({ setTogglePrimaryDropDown, role }) => {
         setTogglePrimaryDropDown(false);
     }
 
-    const navs = [
-        {   
-            id: 1,
-            title: "Commandes",
-            icon: <ShoppingBagIcon sx={{ fontSize: "18px" }} />,
-            redirect: "/orders",
-        },
-    ]
 
     return (
         <div className="absolute w-60 -left-24 ml-2 top-9 bg-white shadow-2xl rounded flex-col text-sm">
@@ -48,29 +40,6 @@ const PrimaryDropDownMenu = ({ setTogglePrimaryDropDown, role }) => {
                     Admin Dashboard
                 </Link>
             }
-
-            {navs.map((item) => {
-                const {id, title, icon, redirect } = item;
-
-                return (
-                    <>
-                        {title === "Wishlist" ? (
-                            <Link className="pl-3 py-3.5 border-b flex gap-3 items-center hover:bg-gray-50" to={redirect} key={i}>
-                                <span className="text-primary-blue">{icon}</span>
-                                {title}
-                                <span className="ml-auto mr-3 bg-gray-100 p-0.5 px-2 text-gray-600 rounded">
-                                    {wishlistItems.length}
-                                </span>
-                            </Link>
-                        ) : (
-                            <Link className="pl-3 py-3.5 border-b flex gap-3 items-center hover:bg-gray-50" to={redirect} key={id}>
-                                <span className="text-primary-blue">{icon}</span>
-                                {title}
-                            </Link>
-                        )}
-                    </>
-                )
-            })}
 
             <div className="pl-3 py-3.5 flex gap-3 items-center hover:bg-gray-50 rounded-b cursor-pointer" onClick={handleLogout} >
                 <span className="text-primary-blue"><PowerSettingsNewIcon sx={{ fontSize: "18px" }} /></span>

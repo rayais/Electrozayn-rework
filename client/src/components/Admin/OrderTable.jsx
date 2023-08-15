@@ -18,6 +18,17 @@ const OrderTable = () => {
 
     const { orders, error } = useSelector((state) => state.allOrders);
     const { loading, isDeleted, error: deleteError } = useSelector((state) => state.order);
+    const handleRowClick = (rowData) => {
+        // Pass the clicked row's data to the Actions component
+        return (
+            <Actions
+                editRoute={"order"}
+                deleteHandler={deleteOrderHandler}
+                id={rowData.id}
+                rowData={rowData} // Pass the row's data
+            />
+        );
+    };
 
     useEffect(() => {
         if (error) {
@@ -77,32 +88,35 @@ const OrderTable = () => {
     const groupedOrders = {};
 
     orders?.forEach((order) => {
-      if (!groupedOrders[order.user_id]) {
-        groupedOrders[order.user_id] = {
+      if (!groupedOrders[order.id]) {
+        groupedOrders[order.id] = {
           id: order.id,
           userName: order.FirstName,
           email: order.Email,
-          total_price: 0, // Initialize total_price
+          total_price: 0, 
           products: [],
           status : order.validate_add_or_not,
           phone : order.PhoneNumber,
-          date: order.date // Initialize products array
+          date: order.date,
         };
       }
     
       // Add product to the user's products array
-      groupedOrders[order.user_id].products.push({
+      groupedOrders[order.id].products.push({
         productName: order.product_name,
         productQuantity: order.product_quantity,
         productPrice: parseFloat(order.total_price),
+        product_price: order.product_price
       });
     
       // Update total price for the user
-      groupedOrders[order.user_id].total_price = parseFloat(order.total_price);
+      groupedOrders[order.id].total_price = parseFloat(order.total_price);
       
     });
     
-
+    
+    const rows = Object.values(groupedOrders);
+    
     const columns = [
         {
             field: "id",
@@ -160,14 +174,14 @@ const OrderTable = () => {
             flex: 0.1,
             renderCell: (params) => (
                 <Tooltip title={params.row.products?.map(product => product.productName).join(", ")}>
-            <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                {params.row.products?.map((product, index) => (
-                    <div key={index}>
-                        {product.productName}
+                    <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                        {params.row.products?.map((product, index) => (
+                            <div key={index}>
+                                {product.productName}
+                            </div>
+                        ))}
                     </div>
-                ))}
-            </div>
-        </Tooltip>
+                </Tooltip>
               ),
         },
         {
@@ -205,16 +219,14 @@ const OrderTable = () => {
             sortable: false,
             renderCell: (params) => {
                 return (
-                    <Actions
-                    deleteHandler={deleteOrderHandler}
-                    id={params.row.id}
-                />
+                    <div onClick={() => handleRowClick(params.row)}>
+                        {handleRowClick(params.row)} 
+                    </div>
                 );
             },            
         },
     ];
 
-    const rows = Object.values(groupedOrders);
 
    
     

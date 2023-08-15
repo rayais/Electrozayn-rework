@@ -56,7 +56,6 @@ const Sidebar = ({ activeTab, setToggleSidebar, user }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { enqueueSnackbar } = useSnackbar();
-    console.log(user)
 
     const handleLogout = () => {
         dispatch(logoutUser());

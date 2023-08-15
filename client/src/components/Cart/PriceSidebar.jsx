@@ -28,7 +28,7 @@ const PriceSidebar = ({ cartItems }) => {
                     <p className="flex justify-between text-lg font-medium">Prix totale <span>TND {totalWithDelivery.toLocaleString()}</span></p>
                     <div className="border border-dashed"></div>
 
-                    {/* <p className="font-medium text-primary-green">You will save TND {cartItems.reduce((sum, item) => sum + ((item.cuttedPrice * item.quantity) - (item.price * item.quantity)), 0).toLocaleString()} on this order</p> */}
+                    <p className="font-medium text-primary-green"><h1>Les achats +100 TND bénéficient de la livraison gratuite.</h1></p>
 
                 </div>
 

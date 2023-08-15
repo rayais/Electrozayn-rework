@@ -22,3 +22,12 @@ body {
     background-repeat: no-repeat;
 }
 /* login signup sidebar bg image */
+
+.print-hidden {
+  display: none;
+}
+
+.small-logo {
+  width: 60px; /* Adjust the width as needed */
+  height: auto; /* Automatically adjust the height based on the width */
+}

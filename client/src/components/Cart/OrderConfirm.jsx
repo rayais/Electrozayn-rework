@@ -15,7 +15,7 @@ const OrderConfirm = () => {
     const { shippingInfo, cartItems } = useSelector((state) => state.cart);
     const { user } = useSelector(state => state.user)
     const { loading: orderLoading, order, error: orderError } = useSelector((state) => state.newOrder);
-    const user_id = user.id
+    const user_id = localStorage.getItem('id')
     const dispatch = useDispatch();
     const { enqueueSnackbar } = useSnackbar();
 
@@ -33,8 +33,8 @@ const OrderConfirm = () => {
         const totalPrice = totalProdPrice + deliveryFee;
 
         const orderData = {
-            FirstName: user?.FirstName,
-            Email: user?.Email,
+            FirstName: user?.session[0].FirstName,
+            Email: user?.session[0].Email,
             address: shippingInfo.address,
             PhoneNumber: shippingInfo.phoneNo,
             Zip: shippingInfo.pincode,

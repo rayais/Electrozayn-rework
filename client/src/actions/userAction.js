@@ -56,8 +56,8 @@ export const loginUser = (Email, Password) => async (dispatch) => {
                 payload: data,
             });
 
-            localStorage.setItem("token", data[0]);
-            localStorage.setItem("id", data[2]);
+            localStorage.setItem("token", data);
+            localStorage.setItem("id", data.user_id);
         } else {
             // Unsuccessful login
             dispatch({

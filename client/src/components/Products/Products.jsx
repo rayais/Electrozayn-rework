@@ -22,52 +22,29 @@ import { useLocation } from 'react-router-dom';
 import Categories from '../Layouts/Categories';
 
 const Products = () => {
-
     const dispatch = useDispatch();
     const { enqueueSnackbar } = useSnackbar();
+    const { products, loading, error } = useSelector((state) => state.products);
     const params = useParams();
-    const location = useLocation();
 
-    const [price, setPrice] = useState([0, 200000]);
     const [category, setCategory] = useState("");
-    const [ratings, setRatings] = useState(0);
-
-    // pagination
-    const resultPerPage = 12;
+    const [categoryToggle, setCategoryToggle] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
+    const resultPerPage = 12;
     const startIndex = (currentPage - 1) * resultPerPage;
     const endIndex = startIndex + resultPerPage;
 
-    
-
-    // filter toggles
-    const [categoryToggle, setCategoryToggle] = useState(true);
-    const [ratingsToggle, setRatingsToggle] = useState(true);
-
-    const { products, loading, error, productsCount, filteredProductsCount } = useSelector((state) => state.products);
-    // Slice the products array to display products on the current page
-    // const productsToDisplay = products?.slice(startIndex, endIndex);
-
     const keyword = params.keyword;
 
-    const priceHandler = (e, newPrice) => {
-        setPrice(newPrice);
-    }
-
     const clearFilters = () => {
-        setPrice([0, 200000]);
         setCategory("");
-        setRatings(0);
     }
 
-    // Filter products based on the selected category
-    const filteredProducts = category && products
-    ? products.filter(product => product.catigory && product.catigory.toLowerCase() === category.toLowerCase())
-    : products;
+    const filteredProducts = category
+        ? products.filter(product => product.catigory && product.catigory.toLowerCase() === category.toLowerCase())
+        : products;
 
-        // Slice the filtered products array to display products on the current page
-        const productsToDisplay = filteredProducts?.slice(startIndex, endIndex);
-
+    const productsToDisplay = filteredProducts.slice(startIndex, endIndex);
 
     useEffect(() => {
         if (error) {
@@ -75,7 +52,7 @@ const Products = () => {
             dispatch(clearErrors());
         }
         dispatch(getAdminProducts(keyword));
-    }, [dispatch, keyword, category, price, ratings, currentPage, error, enqueueSnackbar]);
+    }, [dispatch, keyword, category, currentPage, error, enqueueSnackbar]);
 
     return (
         <>

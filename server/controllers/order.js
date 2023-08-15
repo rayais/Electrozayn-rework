@@ -18,6 +18,7 @@ module.exports = {
     const validate_add_or_not = false;
 
     console.log(req.body)
+    
 
     const query = `
       INSERT INTO userorder (validate_add_or_not, FirstName, Email, address, PhoneNumber, country, Zip, total_price, user_id)
@@ -37,7 +38,9 @@ module.exports = {
         user_id,
       ],
       (err, result) => {
+        
         if (err) {
+          console.error("Error executing query:", err);
           res.status(500).send(err);
         } else {
           const orderId = result.insertId; // Get the newly inserted order ID
