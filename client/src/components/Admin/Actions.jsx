@@ -17,8 +17,34 @@ const Actions = ({ id, deleteHandler, name, editRoute, rowData}) => {
         setOpen(false);
     };
 
-    const componentRef = React.createRef();
     const [printVisible, setPrintVisible] = useState(false)
+
+    const componentRef = useRef();
+    const handlePrint = () => {
+        const contentToPrint = componentRef.current;
+
+        if (contentToPrint) {
+
+            const printWindow = window.open('', '_blank');
+            printWindow.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Print Receipt</title>
+                    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css">
+                </head>
+                <body>
+                    ${contentToPrint.outerHTML}
+                </body>
+                </html>
+            `);
+
+            printWindow.document.close();
+            printWindow.print();
+            setPrintVisible(false)
+
+            // After printing, add the class back to hide the content
+        }}
 
     return (
         <>
@@ -29,16 +55,15 @@ const Actions = ({ id, deleteHandler, name, editRoute, rowData}) => {
                     </Link>
                 ) : 
                 <>
-                <ReactToPrint // Wrap the component you want to print with ReactToPrint
-                    trigger={() => (
-                        
-                        <button onClick={() => setPrintVisible(true)} className="text-green-600 hover:bg-green-200 p-1 rounded-full bg-green-100">
+                
+                        <button onClick={() => {
+                            setPrintVisible(true)
+                            handlePrint()  
+                        }} className="text-green-600 hover:bg-green-200 p-1 rounded-full bg-green-100">
                             <Print />
                         </button>
-                    )}
-                    content={() => componentRef.current} // Set the content to be printed
-                    />
-                    <div className={!printVisible ? 'print-hidden' : '' } >
+                    
+                    <div className={!printVisible ? 'print-hidden' : '' }  >
                         <div ref={componentRef}>
                             <ToPrint rowData={rowData}/>
                         </div>

@@ -18,10 +18,11 @@ import StarIcon from '@mui/icons-material/Star';
 import { categories } from '../../utils/constants';
 import MetaData from '../Layouts/MetaData';
 import { getRandomProducts } from '../../utils/functions';
-import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Categories from '../Layouts/Categories';
 
 const Products = () => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const { enqueueSnackbar } = useSnackbar();
     const { products, loading, error } = useSelector((state) => state.products);
@@ -38,6 +39,7 @@ const Products = () => {
 
     const clearFilters = () => {
         setCategory("");
+        
     }
 
     const filteredProducts = category
@@ -52,7 +54,22 @@ const Products = () => {
             dispatch(clearErrors());
         }
         dispatch(getAdminProducts(keyword));
-    }, [dispatch, keyword, category, currentPage, error, enqueueSnackbar]);
+        // Add event listener to detect clicks outside category filter area
+        const handleClickOutsideCategory = (e) => {
+            const categoryFilter = document.getElementById("category-filter");
+
+            if (categoryToggle && categoryFilter && !categoryFilter.contains(e.target)) {
+                setCategory("");
+                navigate('/products')
+            }
+        };
+
+        window.addEventListener("click", handleClickOutsideCategory);
+
+        return () => {
+            window.removeEventListener("click", handleClickOutsideCategory);
+        };
+    }, [dispatch, keyword, category, currentPage, error, enqueueSnackbar, categoryToggle]);
 
     return (
         <>
@@ -82,7 +99,7 @@ const Products = () => {
                                 {/* category filter */}
                                 <div className="flex flex-col border-b px-4">
 
-                                    <div className="flex justify-between cursor-pointer py-2 pb-4 items-center" onClick={() => setCategoryToggle(!categoryToggle)}>
+                                    <div className="flex justify-between cursor-pointer py-2 pb-4 items-center" onClick={() => {setCategoryToggle(!categoryToggle)}}>
                                         <p className="font-medium text-xs uppercase">Category</p>
                                         {categoryToggle ?
                                             <ExpandLessIcon sx={{ fontSize: "20px" }} /> :
@@ -91,11 +108,12 @@ const Products = () => {
                                     </div>
 
                                     {categoryToggle && (
-                                        <div className="flex flex-col pb-1">
+                                        <div className="flex flex-col pb-1" id="category-filter">
                                             <FormControl>
                                                 <RadioGroup
                                                     aria-labelledby="category-radio-buttons-group"
-                                                    onChange={(e) => setCategory(e.target.value)}
+                                                    onChange={(e) => {
+                                                        setCategory(e.target.value)}}
                                                     name="category-radio-buttons"
                                                     value={category}
                                                 >

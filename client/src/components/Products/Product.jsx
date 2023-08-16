@@ -16,7 +16,7 @@ const Product = ({ id, product_name, product_image,  Origin_price, Promo_price }
     
 
     return (
-        <div className="flex flex-col items-start gap-2 px-4 py-6 relative hover:shadow-lg rounded-sm">
+        <div className="flex flex-col items-start items-center gap-2 px-4 py-6 relative hover:shadow-lg rounded-sm">
             {/* <!-- image & product title --> */}
             <Link to={`/product/${id}`} className="flex flex-col items-center text-center group">
                 <div className="w-40 h-80">

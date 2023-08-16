@@ -19,7 +19,7 @@ function ToPrint({rowData}) {
                             <div className="font-semibold">
                                 <h1 className='font-bold'>ELECTROZAYN</h1>
                                 <div className="mt-2">
-                                    Rue d'Athènes, 1 Rue de, Rue Piree, Tunis 1001<br />
+                                    Rue d'Athènes, 1 Rue de Piree, Tunis 1001<br />
                                     +216 51 511 966<br />
                                     Electrozayne@gmail.com
                                     www.electrozayn.com<br />

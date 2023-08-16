@@ -28,7 +28,7 @@ const Home = () => {
   }, [dispatch, error, enqueueSnackbar]);
 
   
-  const ledProd = products.filter((prod) => prod.catigory.includes('led'));
+  const ledProd = products && products.filter((prod) => prod.catigory.includes('led'));
   const TrotinetteProds = products && products.filter((prod) => prod.catigory === "accessoires trottinette et velo électrique" );
 
   return (
