@@ -13,21 +13,18 @@ body {
   border-right: 11px solid transparent;
   border-bottom: 11px solid #fff;
 }
-/* hover navbar dropdown arrow */
 
-/* login signup sidebar bg image */
 .loginSidebar {
     background-image: url("https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/login_img_c4a81e.png");
     background-position: center 85%;
     background-repeat: no-repeat;
 }
-/* login signup sidebar bg image */
 
 .print-hidden {
   display: none;
 }
 
 .small-logo {
-  width: 60px; /* Adjust the width as needed */
-  height: auto; /* Automatically adjust the height based on the width */
+  width: 60px;
+  height: auto; 
 }

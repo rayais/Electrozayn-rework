@@ -8,7 +8,6 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import Print from '@mui/icons-material/Print';
 import ToPrint from '../ToPrint/ToPrint';
-import ReactToPrint from 'react-to-print';
 
 const Actions = ({ id, deleteHandler, name, editRoute, rowData}) => {
     
@@ -31,7 +30,6 @@ const Actions = ({ id, deleteHandler, name, editRoute, rowData}) => {
                 <html>
                 <head>
                     <title>Print Receipt</title>
-                    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css">
                 </head>
                 <body>
                     ${contentToPrint.outerHTML}

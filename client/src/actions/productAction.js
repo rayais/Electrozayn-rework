@@ -87,7 +87,7 @@ export const getProductDetails = (id) => async (dispatch) => {
     try {
         dispatch({ type: PRODUCT_DETAILS_REQUEST });
 
-        const { data } = await axios.get(`https://www.electrozayn.com/api/get_one_product/${id}`);
+        const { data } = await axios.get(`http://localhost:5500/api/get_one_product/${id}`);
 
         dispatch({
             type: PRODUCT_DETAILS_SUCCESS,
@@ -125,7 +125,7 @@ export const getSliderProducts = () => async (dispatch) => {
     try {
         dispatch({ type: SLIDER_PRODUCTS_REQUEST });
 
-        const { data } = await axios.get('https://www.electrozayn.com/api/getAll/product');
+        const { data } = await axios.get('http://localhost:5500/api/getAll/product');
         
 
         dispatch({
@@ -171,7 +171,7 @@ export const createProduct = (productData) => async (dispatch) => {
     try {
         dispatch({ type: NEW_PRODUCT_REQUEST });
         const config = { header: { "Content-Type": "application/json" } }
-        const { data } = await axios.post("https://www.electrozayn.com/api/Create/New/product", productData, config);
+        const { data } = await axios.post("http://localhost:5500/api/Create/New/product", productData, config);
 
         dispatch({
             type: NEW_PRODUCT_SUCCESS,
@@ -189,7 +189,7 @@ export const createProduct = (productData) => async (dispatch) => {
 export const updateProduct = (id, productData) => async (dispatch) => {
     try {
         dispatch({ type: UPDATE_PRODUCT_REQUEST });
-        const { data } = await axios.put(`https://www.electrozayn.com/api/update/product/${id}`, productData);
+        const { data } = await axios.put(`http://localhost:5500/api/update/product/${id}`, productData);
 
 
         dispatch({
@@ -208,7 +208,7 @@ export const updateProduct = (id, productData) => async (dispatch) => {
 export const deleteProduct = (id) => async (dispatch) => {
     try {
         dispatch({ type: DELETE_PRODUCT_REQUEST });
-        const { data } = await axios.delete(`https://www.electrozayn.com/api/delete/product/${id}`);
+        const { data } = await axios.delete(`http://localhost:5500/api/delete/product/${id}`);
 
         dispatch({
             type: DELETE_PRODUCT_SUCCESS,

@@ -235,8 +235,6 @@ const OrderTable = () => {
         <>
             <MetaData title="Electrozayn - Le monde des composants électronique et de l'électronique Tunisie" />
 
-            {loading && <BackdropLoader />}
-
             <h1 className="text-lg font-medium uppercase ">orders</h1>
             <div className="bg-white rounded-xl shadow-lg w-full cursor-pointer" style={{ height: 470 }}>
 

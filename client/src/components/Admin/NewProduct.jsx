@@ -92,7 +92,6 @@ const NewProduct = () => {
         <>
             <MetaData title="Electrozayn - Le monde des composants électronique et de l'électronique Tunisie" />
 
-            {/* {loading && <BackdropLoader />} */}
             <form onSubmit={newProductSubmitHandler} encType="multipart/form-data" className="flex flex-col sm:flex-row bg-white rounded-lg shadow p-4" id="mainform">
 
                 <div className="flex flex-col gap-3 m-2 sm:w-1/2">

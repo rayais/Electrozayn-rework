@@ -11,9 +11,9 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { loadUser } from '../../../actions/userAction';
 
-const Header = () => {
+const Header = ({role, user}) => {
 
-  const { isAuthenticated, user } = useSelector((state) => state.user);
+  const { isAuthenticated } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   
   const { cartItems } = useSelector(state => state.cart);
@@ -44,13 +44,13 @@ const Header = () => {
             <Link to="/login" className="px-3 sm:px-9 py-0.5 text-primary-blue bg-white border font-medium rounded-sm cursor-pointer">Connexion</Link>
             :
             (   
-                <span className="userDropDown flex items-center text-white font-medium gap-1 cursor-pointer" onClick={() => setTogglePrimaryDropDown(!togglePrimaryDropDown)}>{user?.session[0].FirstName}
+                <span className="userDropDown flex items-center text-white font-medium gap-1 cursor-pointer" onClick={() => setTogglePrimaryDropDown(!togglePrimaryDropDown)}>{user?.FirstName}
                   <span>{togglePrimaryDropDown ? <ExpandLessIcon sx={{ fontSize: "16px" }} /> : <ExpandMoreIcon sx={{ fontSize: "16px" }} />}</span>
                 </span>
             )
           }
 
-          {togglePrimaryDropDown && <PrimaryDropDownMenu setTogglePrimaryDropDown={setTogglePrimaryDropDown} role={user?.session[0].role} />}
+          {togglePrimaryDropDown && <PrimaryDropDownMenu setTogglePrimaryDropDown={setTogglePrimaryDropDown} role={role} />}
 
           
 
@@ -58,7 +58,7 @@ const Header = () => {
             <span><ShoppingCartIcon /></span>
             {cartItems.length > 0 &&
               <div className="w-5 h-5 p-2 bg-red-500 text-xs rounded-full absolute -top-2 left-3 flex justify-center items-center border">
-                {cartItems.length}
+                {cartItems?.length}
               </div>
             }
             <span className='sm:inline hidden'>Panier</span>

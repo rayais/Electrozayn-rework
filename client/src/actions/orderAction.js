@@ -38,7 +38,7 @@ export const myOrders = (user_id) => async (dispatch) => {
     try {
         dispatch({ type: MY_ORDERS_REQUEST });
 
-        const { data } = await axios.get(`https://www.electrozayn.com/api/get_user_order/${user_id}`);
+        const { data } = await axios.get(`http://localhost:5500/api/get_user_order/${user_id}`);
 
         dispatch({
             type: MY_ORDERS_SUCCESS,
@@ -126,7 +126,7 @@ export const deleteOrder = (id) => async (dispatch) => {
     try {
         dispatch({ type: DELETE_ORDER_REQUEST });
 
-        const { data } = await axios.delete(`https://www.electrozayn.com/api/delete/${id}`);
+        const { data } = await axios.delete(`http://localhost:5500/api/delete/${id}`);
 
         dispatch({
             type: DELETE_ORDER_SUCCESS,

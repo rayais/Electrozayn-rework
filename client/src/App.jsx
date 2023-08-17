@@ -46,17 +46,17 @@ function App() {
   const [user, setUser] = useState({});
   const [role, setRole] = useState("");
   
-  // useEffect(() => {
-  //   if (user_id) {
-  //   axios
-  //     .get("https://www.electrozayn.com/api/user/getone/" + user_id)
-  //     .then((res) => {
-  //       setUser(res.data[0]);
-  //       setRole(res.data[0].role)
+  useEffect(() => {
+    if (user_id) {
+    axios
+      .get("http://localhost:5500/api/user/getone/" + user_id)
+      .then((res) => {
+        setUser(res.data[0]);
+        setRole(res.data[0].role)
         
-  //     }) 
-  //   };
-  // }, [user_id]);
+      }) 
+    };
+  }, [user_id]);
 
   useEffect(() => {
     WebFont.load({
@@ -89,7 +89,7 @@ function App() {
   
   return (
     <>
-      <Header />
+      <Header user= {user} role = {role}/>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
