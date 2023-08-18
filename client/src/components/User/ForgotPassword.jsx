@@ -2,7 +2,7 @@ import TextField from '@mui/material/TextField';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearErrors, forgotPassword } from '../../actions/userAction';
+import { clearErrors, clearMessage, forgotPassword } from '../../actions/userAction';
 import { useSnackbar } from 'notistack';
 import BackdropLoader from '../Layouts/BackdropLoader';
 import MetaData from '../Layouts/MetaData';
@@ -32,7 +32,8 @@ const ForgotPassword = () => {
         }
         if (message) {
             enqueueSnackbar(message, { variant: "success" });
-        }
+            dispatch(clearMessage())
+        }   
     }, [dispatch, error, message, enqueueSnackbar]);
 
 
@@ -47,13 +48,13 @@ const ForgotPassword = () => {
                 <div className="flex sm:w-4/6 sm:mt-4 m-auto mb-7 bg-white shadow-lg">
 
                     <FormSidebar
-                        title="Forgot Your Password?"
-                        tag="Enter the email address associated with your account."
+                        title="Réinitialiser votre mot de passe?"
+                        tag="Entrez l'adresse e-mail associée à votre compte."
                     />
 
                     {/* <!-- login column --> */}
                     <div className="flex-1 overflow-hidden">
-                        <h2 className="text-center text-2xl font-medium mt-6 text-gray-800">Forgot Password</h2>
+                        <h2 className="text-center text-2xl font-medium mt-6 text-gray-800">Réinitialiser votre mot de passe</h2>
 
                         {/* <!-- edit info container --> */}
                         <div className="text-center py-10 px-4 sm:px-14">
@@ -70,7 +71,9 @@ const ForgotPassword = () => {
                                         onChange={(e) => setEmail(e.target.value)}
                                         required
                                     />
-
+                                      <div className="flex flex-col gap-2.5 mt-2 sm:mb-1">
+                                        <button type="submit" className="text-white py-3 w-full bg-primary-orange shadow hover:shadow-lg rounded-sm font-medium">Envoyer</button>
+                                    </div>
                                 </div>
                             </form>
                             {/* <!-- input container --> */}

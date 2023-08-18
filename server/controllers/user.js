@@ -46,7 +46,6 @@ module.exports={
     })
 }),
 LoginUser :(req,res)=>{
-  console.log(req.body)
   var passwordHashed = crypto.createHash('sha256').update(req.body.Password, 'utf8').digest('hex')
   
   // var repeatepasswordHshed=crypto.createHash('sha256').update(req.body.repeatepassword, 'utf8').digest('hex')

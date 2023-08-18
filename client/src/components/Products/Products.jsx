@@ -81,7 +81,7 @@ const Products = () => {
                 <div className="flex gap-3 mt-2 sm:mt-2 sm:mx-3 m-auto mb-7">
 
                     {/* <!-- sidebar column  --> */}
-                    <div className="hidden sm:flex flex-col w-1/5 px-1">
+                    <div className=" sticky sm:flex flex-col sm:w-1/5 w-2/5 px-1">
 
                         {/* <!-- nav tiles --> */}
                         <div className="flex flex-col bg-white rounded-sm shadow">
@@ -93,9 +93,6 @@ const Products = () => {
                             </div>
 
                             <div className="flex flex-col gap-2 py-3 text-sm overflow-hidden">
-
-                                
-
                                 {/* category filter */}
                                 <div className="flex flex-col border-b px-4">
 
@@ -126,14 +123,9 @@ const Products = () => {
                                     )}
 
                                 </div>
-                                {/* category filter */}
-
-                               
-
                             </div>
 
                         </div>
-                        {/* <!-- nav tiles --> */}
 
                     </div>
                     {/* <!-- sidebar column  --> */}

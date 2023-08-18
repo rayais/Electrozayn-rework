@@ -1,6 +1,7 @@
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import Shop from '@mui/icons-material/Shop2';
 import Searchbar from './Searchbar';
 import logo from '../../../assets/images/logo.png';
 import PrimaryDropDownMenu from './PrimaryDropDownMenu';
@@ -38,10 +39,10 @@ const Header = ({role, user}) => {
         {/* <!-- logo & search container --> */}
 
         {/* <!-- right navs --> */}
-        <div className="flex items-center justify-between ml-1 sm:ml-0 gap-0.5 sm:gap-7 relative">
+        <div className="flex items-center justify-between sm:ml-0 gap-3 sm:gap-7 relative">
 
-          {isAuthenticated === false ?
-            <Link to="/login" className="px-3 sm:px-9 py-0.5 text-primary-blue bg-white border font-medium rounded-sm cursor-pointer">Connexion</Link>
+          {!isAuthenticated ?
+            <Link to="/login" className="px-1 sm:px-9 py-0.5 text-primary-blue bg-white border font-medium rounded-sm cursor-pointer">Connexion</Link>
             :
             (   
                 <span className="userDropDown flex items-center text-white font-medium gap-1 cursor-pointer" onClick={() => setTogglePrimaryDropDown(!togglePrimaryDropDown)}>{user?.FirstName}
@@ -54,6 +55,11 @@ const Header = ({role, user}) => {
 
           
 
+          <Link to="/products" className="flex items-center text-white font-medium gap-2 relative">
+            <span><Shop /></span>
+            <span className='sm:inline hidden'>Produits</span>
+          </Link>
+          
           <Link to="/cart" className="flex items-center text-white font-medium gap-2 relative">
             <span><ShoppingCartIcon /></span>
             {cartItems.length > 0 &&

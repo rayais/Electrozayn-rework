@@ -40,6 +40,7 @@ import {
     DELETE_USER_RESET,
     DELETE_USER_FAIL,
     REMOVE_USER_DETAILS,
+    CLEAR_MESSAGES,
 } from '../constants/userConstants';
 
 export const userReducer = (state = { user: {} }, { type, payload }) => {
@@ -147,7 +148,8 @@ export const profileReducer = (state = {}, { type, payload }) => {
             return {
                 ...state,
                 error: null,
-            };
+            }
+        
         default:
             return state;
     }
@@ -185,6 +187,12 @@ export const forgotPasswordReducer = (state = {}, { type, payload }) => {
                 ...state,
                 error: null,
             };
+            case CLEAR_MESSAGES:
+                return {
+                    ...state,
+                    success: null,
+                    message: null,
+                };
         default:
             return state;
     }

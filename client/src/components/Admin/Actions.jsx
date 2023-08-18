@@ -15,7 +15,6 @@ const Actions = ({ id, deleteHandler, name, editRoute, rowData}) => {
     const handleClose = () => {
         setOpen(false);
     };
-
     const [printVisible, setPrintVisible] = useState(false)
 
     const componentRef = useRef();

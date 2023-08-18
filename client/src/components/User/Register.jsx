@@ -98,8 +98,8 @@ const Register = () => {
                 <div className="flex sm:w-4/6 sm:mt-4 m-auto mb-7 bg-white shadow-lg">
 
                     <FormSidebar
-                        title="Looks like you're new here!"
-                        tag="Sign up with your mobile number to get started"
+                        title="Vous semblez être nouveau ici !"
+                        tag="Inscrivez-vous avec votre numéro de téléphone pour commencer"
                     />
 
                     {/* <!-- signup column --> */}
@@ -118,7 +118,7 @@ const Register = () => {
                                     <TextField
                                         fullWidth
                                         id="full-name"
-                                        label="Full Name"
+                                        label="Nom complet"
                                         name="FirstName"
                                         value={FirstName}
                                         onChange={handleDataChange}
@@ -141,7 +141,7 @@ const Register = () => {
                                 <div className="flex flex-col w-full justify-between sm:flex-row gap-3 items-center">
                                     <TextField
                                         id="password"
-                                        label="Password"
+                                        label="Mot de passe"
                                         type="password"
                                         name="Password"
                                         value={Password}
@@ -152,7 +152,7 @@ const Register = () => {
                                 <div className="flex flex-col w-full justify-between sm:flex-row gap-3 items-center">
                                     <TextField
                                         id="Phone Number"
-                                        label="Number"
+                                        label="Numéro mobile"
                                         type="Number"
                                         name="PhoneNumber"
                                         value={PhoneNumber}
@@ -179,8 +179,8 @@ const Register = () => {
                                         Choose File
                                     </label>
                                 </div> */}
-                                <button type="submit" className="text-white py-3 w-full bg-primary-orange shadow hover:shadow-lg rounded-sm font-medium">Signup</button>
-                                <Link to="/login" className="hover:bg-gray-50 text-primary-blue text-center py-3 w-full shadow border rounded-sm font-medium">Existing User? Log in</Link>
+                                <button type="submit" className="text-white py-3 w-full bg-primary-orange shadow hover:shadow-lg rounded-sm font-medium">S'inscrire</button>
+                                <Link to="/login" className="hover:bg-gray-50 text-primary-blue text-center py-3 w-full shadow border rounded-sm font-medium">Vous avez déjà un compte?</Link>
                             </div>
 
                         </form>

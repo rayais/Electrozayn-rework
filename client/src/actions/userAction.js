@@ -35,6 +35,7 @@ import {
     ALL_USERS_FAIL,
     ALL_USERS_SUCCESS,
     ALL_USERS_REQUEST,
+    CLEAR_MESSAGES,
 } from '../constants/userConstants';
 import axios from 'axios';
 
@@ -224,19 +225,18 @@ export const forgotPassword = (email) => async (dispatch) => {
         const config = {
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${userToken}`
             },
         }
 
         const { data } = await axios.post(
-            '/api/v1/password/forgot',
+            'http://www.localhost:5500/api/request-password-reset',
             email,
             config
         );
 
         dispatch({
             type: FORGOT_PASSWORD_SUCCESS,
-            payload: data.message,
+            payload: data,
         });
 
     } catch (error) {
@@ -248,7 +248,7 @@ export const forgotPassword = (email) => async (dispatch) => {
 };
 
 // Reset Password
-export const resetPassword = (token, passwords) => async (dispatch) => {
+export const resetPassword = (token, newPassword, confirmPassword) => async (dispatch) => {
     try {
 
         dispatch({ type: RESET_PASSWORD_REQUEST });
@@ -256,19 +256,18 @@ export const resetPassword = (token, passwords) => async (dispatch) => {
         const config = {
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${userToken}`
             },
         }
 
         const { data } = await axios.put(
-            `/api/v1/password/reset/${token}`,
-            passwords,
+            `http://www.localhost:5500/api/password/reset/${token}`,
+            {newPassword, confirmPassword},
             config
         );
 
         dispatch({
             type: RESET_PASSWORD_SUCCESS,
-            payload: data.success,
+            payload: data,
         });
 
     } catch (error) {
@@ -391,4 +390,8 @@ export const deleteUser = (id) => async (dispatch) => {
 // Clear All Errors
 export const clearErrors = () => async (dispatch) => {
     dispatch({ type: CLEAR_ERRORS });
+};
+// Clear All messages
+export const clearMessage = () => async (dispatch) => {
+    dispatch({ type: CLEAR_MESSAGES });
 };

@@ -48,7 +48,7 @@ const Login = () => {
                     {/* <!-- sidebar column  --> */}
                     <div className="loginSidebar bg-primary-blue p-10 pr-12 hidden sm:flex flex-col gap-4 w-2/5">
                         <h1 className="font-medium text-white text-3xl">Login</h1>
-                        <p className="text-gray-200 text-lg">Get access to your Orders, Wishlist and Recommendations</p>
+                        <p className="text-gray-200 text-lg">Gagnez l'accès à votre compte et commencez à passer vos commandes.</p>
                     </div>
                     {/* <!-- sidebar column  --> */}
 
@@ -74,7 +74,7 @@ const Login = () => {
                                     <TextField
                                         fullWidth
                                         id="password"
-                                        label="Password"
+                                        label="Mot de passe"
                                         type="password"
                                         value={Password}
                                         onChange={(e) => setPassword(e.target.value)}
@@ -83,9 +83,9 @@ const Login = () => {
                                     {/* <span className="text-xxs text-red-500 font-medium text-left mt-0.5">Please enter valid Email ID/Mobile number</span> */}
 
                                     {/* <!-- button container --> */}
-                                    <div className="flex flex-col gap-2.5 mt-2 mb-32">
+                                    <div className="flex flex-col gap-2.5 mt-2 sm:mb-1">
                                         <button type="submit" className="text-white py-3 w-full bg-primary-orange shadow hover:shadow-lg rounded-sm font-medium">Login</button>
-                                        <Link to="/password/forgot" className="hover:bg-gray-50 text-primary-blue text-center py-3 w-full shadow border rounded-sm font-medium">Forgot Password?</Link>
+                                        <Link to="/password/forgot" className="hover:bg-gray-50 text-primary-blue text-center py-3 w-full shadow border rounded-sm font-medium">Mot de passe oublié?</Link>
                                     </div>
                                     {/* <!-- button container --> */}
 

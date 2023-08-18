@@ -98,8 +98,10 @@ const OrderTable = () => {
           status : order.validate_add_or_not,
           phone : order.PhoneNumber,
           date: order.date,
+          address: order.address
         };
       }
+
     
       // Add product to the user's products array
       groupedOrders[order.id].products.push({
