@@ -9,7 +9,7 @@ const {userRoter}=require('./router/userRouter')
 const {orderRouter} = require("./router/orderRouter");
 app.use(
   cors({
-    origin: "http://localhost:5500", // Update this to match the origin of your request
+    origin: "*", // Update this to match the origin of your request
     credentials: true,
     optionSuccessStatus: 200,
   })

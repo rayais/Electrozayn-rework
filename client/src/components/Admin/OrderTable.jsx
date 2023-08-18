@@ -49,7 +49,7 @@ const OrderTable = () => {
 
     const updateOrderStatus = async (id, newStatus) => {
         try {
-            const response = await fetch(`http://localhost:5500/api/update/order/${id}`, {
+            const response = await fetch(`https://www.electrozayn.com/api/update/order/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json', // Set the Content-Type header

@@ -49,7 +49,7 @@ function App() {
   useEffect(() => {
     if (user_id) {
     axios
-      .get("http://localhost:5500/api/user/getone/" + user_id)
+      .get("https://www.electrozayn.com/api/user/getone/" + user_id)
       .then((res) => {
         setUser(res.data[0]);
         setRole(res.data[0].role)

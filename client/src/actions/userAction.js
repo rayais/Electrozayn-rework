@@ -45,7 +45,7 @@ export const loginUser = (Email, Password) => async (dispatch) => {
         dispatch({ type: LOGIN_USER_REQUEST });
 
         const { data } = await axios.post(
-            'http://localhost:5500/api/electrozayn/login', //changed api//
+            'https://www.electrozayn.com/api/electrozayn/login', //changed api//
             { Email, Password },
         );
 
@@ -90,7 +90,7 @@ export const registerUser = (userData) => async (dispatch) => {
         }
 
         const { data } = await axios.post(
-            'http://localhost:5500/api/Create_user/electrozayn', config,
+            'https://www.electrozayn.com/api/Create_user/electrozayn', config,
             userData,
         );
 
@@ -122,7 +122,7 @@ export const loadUser = (user_data) => async (dispatch) => {
             },
         }
 
-        const { data } = await axios.get('http://localhost:5500/api/user/getone/',config, user_id);
+        const { data } = await axios.get('https://www.electrozayn.com/api/user/getone/',config, user_id);
 
         dispatch({
             type: LOAD_USER_SUCCESS,
@@ -140,7 +140,7 @@ export const loadUser = (user_data) => async (dispatch) => {
 // Logout User
 export const logoutUser = () => async (dispatch) => {
     try {
-        await axios.get('http://localhost:5500/api/logout');
+        await axios.get('https://www.electrozayn.com/api/logout');
         dispatch({ type: LOGOUT_USER_SUCCESS });
         localStorage.clear();
     } catch (error) {
@@ -286,7 +286,7 @@ export const getAllUsers = () => async (dispatch) => {
     try {
 
         dispatch({ type: ALL_USERS_REQUEST });
-        const { data } = await axios.get('http://localhost:5500/api/user/getAll');   /*change to electrozayn.com */
+        const { data } = await axios.get('https://www.electrozayn.com/api/user/getAll');   /*change to electrozayn.com */
         dispatch({
             type: ALL_USERS_SUCCESS,
             payload: data,

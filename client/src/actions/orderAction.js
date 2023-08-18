@@ -9,7 +9,7 @@ export const newOrder = (order, id) => async (dispatch) => {
 
        
 
-        const { data } = await axios.post(`http://localhost:5500/api/create/order/${id}`, {
+        const { data } = await axios.post(`https://www.electrozayn.com/api/create/order/${id}`, {
             FirstName: order.FirstName,
           Email: order.Email,
           PhoneNumber: order.PhoneNumber,
@@ -38,7 +38,7 @@ export const myOrders = (user_id) => async (dispatch) => {
     try {
         dispatch({ type: MY_ORDERS_REQUEST });
 
-        const { data } = await axios.get(`http://localhost:5500/api/get_user_order/${user_id}`);
+        const { data } = await axios.get(`https://www.electrozayn.com/api/get_user_order/${user_id}`);
 
         dispatch({
             type: MY_ORDERS_SUCCESS,
@@ -80,7 +80,7 @@ export const getAllOrders = () => async (dispatch) => {
     try {
         dispatch({ type: ALL_ORDERS_REQUEST });
 
-        const { data } = await axios.get('http://localhost:5500/api/order_items'); /*change this api to electrozayn.com*/
+        const { data } = await axios.get('https://www.electrozayn.com/api/order_items'); /*change this api to electrozayn.com*/
 
         dispatch({
             type: ALL_ORDERS_SUCCESS,
@@ -126,7 +126,7 @@ export const deleteOrder = (id) => async (dispatch) => {
     try {
         dispatch({ type: DELETE_ORDER_REQUEST });
 
-        const { data } = await axios.delete(`http://localhost:5500/api/delete/${id}`);
+        const { data } = await axios.delete(`https://www.electrozayn.com/api/delete/${id}`);
 
         dispatch({
             type: DELETE_ORDER_SUCCESS,
