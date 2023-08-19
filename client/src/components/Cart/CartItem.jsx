@@ -27,7 +27,7 @@ const CartItem = ({ product, name, seller, price, cuttedPrice, image, stock, qua
     
     const removeCartItem = (id) => {
         dispatch(removeItemsFromCart(id));
-        enqueueSnackbar("Product Removed From Cart", { variant: "success" });
+        enqueueSnackbar("Produit retiré du panier avec succès", { variant: "success" });
     }
 
     const saveForLaterHandler = (id) => {
@@ -60,9 +60,9 @@ const CartItem = ({ product, name, seller, price, cuttedPrice, image, stock, qua
 
                     {/* <!-- price desc --> */}
                     <div className="flex items-baseline gap-2 text-xl font-medium">
-                        {cuttedPrice && <span>TND {cuttedPrice}</span>}
+                        {cuttedPrice  && <span>TND {cuttedPrice}</span>}
                         {cuttedPrice && price !== cuttedPrice && <span className="text-gray-500 line-through">TND {price}</span>}
-                        {!cuttedPrice && <span>TND {price}</span>}
+                        {!cuttedPrice  && <span>TND {price}</span>}
                     </div>
                     {/* <!-- price desc --> */}
 

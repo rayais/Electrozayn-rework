@@ -39,6 +39,7 @@ const Products = () => {
 
     const clearFilters = () => {
         setCategory("");
+        setCurrentPage(1); 
         
     }
 
@@ -49,6 +50,12 @@ const Products = () => {
     const productsToDisplay = filteredProducts.slice(startIndex, endIndex);
 
     useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: "smooth"
+          });
+
         if (error) {
             enqueueSnackbar(error, { variant: "error" });
             dispatch(clearErrors());
@@ -65,25 +72,24 @@ const Products = () => {
         };
 
         window.addEventListener("click", handleClickOutsideCategory);
-
+        
         return () => {
             window.removeEventListener("click", handleClickOutsideCategory);
         };
     }, [dispatch, keyword, category, currentPage, error, enqueueSnackbar, categoryToggle]);
-
+   
     return (
         <>
             <MetaData title="Electrozayn - Le monde des composants électronique et de l'électronique Tunisie" />
                 <Categories />
-            <main className="w-full mt-14 sm:mt-0">
+            <main className="w-full mt-0 sm:mt-0">
 
                 {/* <!-- row --> */}
                 <div className="flex gap-3 mt-2 sm:mt-2 sm:mx-3 m-auto mb-7">
 
                     {/* <!-- sidebar column  --> */}
-                    <div className=" sticky sm:flex flex-col sm:w-1/5 w-2/5 px-1">
+                    <div className=" w-2/5 sm:w-1/5 px-1 bg-white sticky top-20 overflow-y-auto max-h-screen ">
 
-                        {/* <!-- nav tiles --> */}
                         <div className="flex flex-col bg-white rounded-sm shadow">
 
                             {/* <!-- filters header --> */}
@@ -110,7 +116,8 @@ const Products = () => {
                                                 <RadioGroup
                                                     aria-labelledby="category-radio-buttons-group"
                                                     onChange={(e) => {
-                                                        setCategory(e.target.value)}}
+                                                        setCategory(e.target.value)
+                                                    }}
                                                     name="category-radio-buttons"
                                                     value={category}
                                                 >
@@ -128,10 +135,11 @@ const Products = () => {
                         </div>
 
                     </div>
+                        {/* <!-- nav tiles --> */}
                     {/* <!-- sidebar column  --> */}
 
                     {/* <!-- search column --> */}
-                    <div className="flex-1">
+                    <div className="flex-1 ">
 
                         {!loading && products?.length === 0 && (
                             <div className="flex flex-col items-center justify-center gap-3 bg-white shadow-sm rounded-sm p-6 sm:p-16">
@@ -144,7 +152,7 @@ const Products = () => {
                         {loading ? <Loader /> : (
                             <div className="flex flex-col gap-2 pb-4 justify-center items-center w-full overflow-hidden bg-white">
 
-                                <div className="grid grid-cols-1 sm:grid-cols-4 w-full  place-content-start overflow-hidden pb-4 border-b">
+                                <div className="grid grid-cols-1 sm:grid-cols-4 place-content-start overflow-hidden pb-4 border-b">
                                     {productsToDisplay?.map((product, i) => (
                                             <Product {...product} key={i} />
                                         ))

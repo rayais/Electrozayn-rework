@@ -16,7 +16,6 @@ const Home = () => {
   const { enqueueSnackbar } = useSnackbar();
 
   const { error, loading, products} = useSelector((state) => state.products);
-
   
 
   useEffect(() => {

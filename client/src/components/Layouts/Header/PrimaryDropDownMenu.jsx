@@ -26,7 +26,7 @@ const PrimaryDropDownMenu = ({ setTogglePrimaryDropDown, role }) => {
     const handleLogout = () => {
         dispatch(logoutUser());
         navigate("/");
-        enqueueSnackbar("Logout Successfully", { variant: "success" });
+        enqueueSnackbar("Vous êtes déconnecté(e)", { variant: "success" });
         setTogglePrimaryDropDown(false);
     }
 

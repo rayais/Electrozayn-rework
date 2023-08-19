@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { offerProducts } from '../../../utils/constants';
 import { getRandomProducts } from '../../../utils/functions';
 import { useSelector } from 'react-redux';
+import { addItemsToCart } from '../../../actions/cartAction';
+import { enqueueSnackbar } from 'notistack';
 
 
 export const settings = {
@@ -47,7 +49,11 @@ const DealSlider = ({ title, products }) => {
 
   // Get a random subset of products
   const randomProducts = getRandomProducts(sortedProducts, 12);
-    
+
+  const addToCartHandler = () => {
+    dispatch(addItemsToCart(id));
+    enqueueSnackbar("Produit ajouté au panier avec succès", { variant: "success" });
+}
     return (
         <section className="bg-white w-full shadow overflow-hidden">
             {/* <!-- header --> */}
