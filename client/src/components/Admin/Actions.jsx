@@ -28,7 +28,7 @@ const Actions = ({ id, deleteHandler, name, editRoute, rowData}) => {
                 <!DOCTYPE html>
                 <html>
                 <head>
-                    <title>Print Receipt</title>
+                    <title>ELECTROZAYN - BON DE COMMANDE</title>
                 </head>
                 <body>
                     ${contentToPrint.outerHTML}

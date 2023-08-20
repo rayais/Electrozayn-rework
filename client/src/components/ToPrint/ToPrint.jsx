@@ -24,7 +24,7 @@ function ToPrint({ rowData }) {
                     www.electrozayn.com
                     <br />
                     <br />
-                    <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>BON DE COMMANDE</h1>
+                    <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>BON DE COMMANDE</h2>
                     <h1 style={{ fontSize: '1rem', fontWeight: 'bold' }}>ADRESSE CLIENT:</h1>
                     <h1 style={{ fontSize: '1rem', fontWeight: 'bold' }}>{rowData.address}</h1>
                     <br />

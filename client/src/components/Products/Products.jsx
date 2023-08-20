@@ -47,7 +47,7 @@ const Products = () => {
         ? products.filter(product => product.catigory && product.catigory.toLowerCase() === category.toLowerCase())
         : products;
 
-    const productsToDisplay = filteredProducts.slice(startIndex, endIndex);
+    const productsToDisplay = filteredProducts?.slice(startIndex, endIndex);
 
     useEffect(() => {
         window.scrollTo({
@@ -56,26 +56,11 @@ const Products = () => {
             behavior: "smooth"
           });
 
-        if (error) {
+          if (error) {
             enqueueSnackbar(error, { variant: "error" });
             dispatch(clearErrors());
         }
         dispatch(getAdminProducts(keyword));
-        // Add event listener to detect clicks outside category filter area
-        const handleClickOutsideCategory = (e) => {
-            const categoryFilter = document.getElementById("category-filter");
-
-            if (categoryToggle && categoryFilter && !categoryFilter.contains(e.target)) {
-                setCategory("");
-                navigate('/products')
-            }
-        };
-
-        window.addEventListener("click", handleClickOutsideCategory);
-        
-        return () => {
-            window.removeEventListener("click", handleClickOutsideCategory);
-        };
     }, [dispatch, keyword, category, currentPage, error, enqueueSnackbar, categoryToggle]);
    
     return (
