@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { clearErrors, getSliderProducts } from '../../actions/productAction';
 import { useSnackbar } from 'notistack';
 import MetaData from '../Layouts/MetaData';
-import axios from 'axios'
 
 
 const Home = () => {

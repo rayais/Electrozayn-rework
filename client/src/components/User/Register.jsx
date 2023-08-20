@@ -98,7 +98,7 @@ const Register = () => {
                 <div className="flex sm:w-4/6 sm:mt-4 m-auto mb-7 bg-white shadow-lg">
 
                     <FormSidebar
-                        title="Vous semblez être nouveau ici !"
+                        title="Vous semblez être nouveau ici"
                         tag="Inscrivez-vous avec votre numéro de téléphone pour commencer"
                     />
 

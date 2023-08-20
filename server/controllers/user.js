@@ -25,7 +25,7 @@ module.exports={
         connection.query(query1,(err,result)=>{
           var session=utils.RandomString(32)
           middleware.CreateSession(req,res,result[0].id,session)
-          res.status(200).send(result)
+          // res.status(200).send(result)
 
         })
         

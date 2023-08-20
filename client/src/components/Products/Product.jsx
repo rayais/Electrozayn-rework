@@ -2,7 +2,6 @@
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
-import { Height } from '@mui/icons-material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { addItemsToCart } from '../../actions/cartAction';
 
@@ -13,7 +12,6 @@ const Product = ({ id, product_name, product_image,  Origin_price, Promo_price }
 
     const { wishlistItems } = useSelector((state) => state.wishlist);
 
-    const itemInWishlist = wishlistItems.some((i) => i.product === id);
 
     const addToCartHandler = () => {
         dispatch(addItemsToCart(id));

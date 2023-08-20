@@ -42,14 +42,13 @@ const ForgotPassword = () => {
             <MetaData title="Electrozayn - Le monde des composants électronique et de l'électronique Tunisie" />
 
             {loading && <BackdropLoader />}
-            <main className="w-full mt-12 sm:pt-20 sm:mt-0">
+            <main className="w-full  mt-20 lg:mt-20 sm:pt-20 sm:mt-0">
 
                 {/* <!-- row --> */}
                 <div className="flex sm:w-4/6 sm:mt-4 m-auto mb-7 bg-white shadow-lg">
 
                     <FormSidebar
                         title="Réinitialiser votre mot de passe?"
-                        tag="Entrez l'adresse e-mail associée à votre compte."
                     />
 
                     {/* <!-- login column --> */}

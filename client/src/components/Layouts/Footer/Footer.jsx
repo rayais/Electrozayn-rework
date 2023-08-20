@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react';
-import WorkIcon from '@mui/icons-material/Work';
-import StarsIcon from '@mui/icons-material/Stars';
-import CardGiftcardIcon from '@mui/icons-material/CardGiftcard';
-import HelpIcon from '@mui/icons-material/Help';
-import paymentMethods from '../../../assets/images/payment-methods.svg';
 import { useLocation } from 'react-router-dom';
+import TikTok from '../../../assets/images/tiktok.svg'
+import Facebook from '../../../assets/images/facebook.svg'
+
 
 const footerLinks = [
   // {
@@ -46,16 +44,14 @@ const footerLinks = [
     links: [
       {
         name: "Facebook",
-        redirect: "#",
+        redirect: "https://www.facebook.com/rafrafii",
+        image: <img src={Facebook} alt="Facebook" className="social-icon"/>,
       },
       {
         name: "TikTok",
-        redirect: "#",
+        redirect: "https://www.tiktok.com/@electrozayn7",
+        image: <img src={TikTok} alt="TikTok" className="social-icon"/>,
       },
-      {
-        name: "YouTube",
-        redirect: "#",
-      }
     ]
   }
 ]
@@ -74,13 +70,16 @@ const Footer = () => {
       {!adminRoute && (
         <>
           <footer className="mt-20 w-full py-1 sm:py-4 px-4 sm:px-12 bg-primary-darkBlue text-white text-xs border-b border-gray-600 flex flex-col sm:flex-row overflow-hidden">
-            <div className="w-full sm:w-7/12 flex flex-col sm:flex-row">
+            <div className="w-full sm:w-6/12 flex flex-col justify-center sm:flex-row">
 
               {footerLinks.map((el, i) => (
-                <div className="w-full sm:w-1/5 flex flex-row gap-10 sm:my-6 ml-5" key={i}>
-                  <h2 className="text-primary-grey mb-2 uppercase">{el.title}</h2>
+                <div className="w-full sm:w-2/5 flex flex-row gap-20 sm:my-6 ml-5" key={i}>
+                  {/* <h2 className="text-primary-grey mb-2 uppercase">{el.title}</h2> */}
                   {el.links.map((item, i) => (
-                    <a href={item.redirect} target="_blank" rel="noreferrer" className="hover:underline" key={i}>{item.name}</a>
+                    <a href={item.redirect} target="_blank" rel="noreferrer" className="hover:underline hover:text-primary-blue flex flex-col items-center" key={i}>
+                      {item.image}
+                      {item.name}
+                      </a>
                   ))}
 
                 </div>
@@ -108,7 +107,15 @@ const Footer = () => {
                 <p className="mt-2 leading-5">+216 55 181 417</p>
               </div>
             </div>
-
+            <style>
+              {`
+                .social-icon {
+                  width: 30px; 
+                  height: 30px; 
+                  margin-right: 5px; 
+                }
+              `}
+            </style>
           </footer>
           {/* <!-- footer ends --> */}
 

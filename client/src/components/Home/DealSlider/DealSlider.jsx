@@ -2,11 +2,7 @@ import Product from './Product';
 import Slider from 'react-slick';
 import { NextBtn, PreviousBtn } from '../Banner/Banner';
 import { Link } from 'react-router-dom';
-import { offerProducts } from '../../../utils/constants';
 import { getRandomProducts } from '../../../utils/functions';
-import { useSelector } from 'react-redux';
-import { addItemsToCart } from '../../../actions/cartAction';
-import { enqueueSnackbar } from 'notistack';
 
 
 export const settings = {
@@ -49,17 +45,12 @@ const DealSlider = ({ title, products }) => {
 
   // Get a random subset of products
   const randomProducts = getRandomProducts(sortedProducts, 12);
-
-  const addToCartHandler = () => {
-    dispatch(addItemsToCart(id));
-    enqueueSnackbar("Produit ajouté au panier avec succès", { variant: "success" });
-}
     return (
         <section className="bg-white w-full shadow overflow-hidden">
             {/* <!-- header --> */}
-            <div className="flex px-6 py-3 justify-between items-center">
+            <div className="flex px-6 py-3 justify-between items-center bg-primary-blue">
                 <h1 className="text-xl font-medium">{title}</h1>
-                <Link to="/products" className="bg-primary-blue text-xs font-medium text-white px-5 py-2.5 rounded-sm shadow-lg">VOIR PLUS</Link>
+                <Link to="/products" className="bg-white text-xs font-medium text-black px-5 py-2.5 rounded-sm shadow-lg">VOIR PLUS</Link>
             </div>
             <hr />
             {/* <!-- header --> */}

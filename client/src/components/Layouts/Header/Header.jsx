@@ -6,12 +6,9 @@ import Person from '@mui/icons-material/Person';
 import Searchbar from './Searchbar';
 import logo from '../../../assets/images/logo.png';
 import PrimaryDropDownMenu from './PrimaryDropDownMenu';
-import SecondaryDropDownMenu from './SecondaryDropDownMenu';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
-import { loadUser } from '../../../actions/userAction';
 
 const Header = ({role, user}) => {
 
@@ -21,7 +18,6 @@ const Header = ({role, user}) => {
   const { cartItems } = useSelector(state => state.cart);
 
   const [togglePrimaryDropDown, setTogglePrimaryDropDown] = useState(false);
-  const [toggleSecondaryDropDown, setToggleSecondaryDropDown] = useState(false);
   return (
 
     <header className="bg-primary-blue fixed top-0 py-2.5 w-full z-10">

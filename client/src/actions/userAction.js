@@ -84,14 +84,10 @@ export const registerUser = (userData) => async (dispatch) => {
 
         dispatch({ type: REGISTER_USER_REQUEST });
 
-        const config = {
-            headers: {
-                "Content-Type": "application/json",
-            },
-        }
+       
 
         const { data } = await axios.post(
-            'http://localhost:5500/api/Create_user/electrozayn', config,
+            'http://localhost:5500/api/Create_user/electrozayn',
             userData,
         );
 

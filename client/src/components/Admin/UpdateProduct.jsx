@@ -176,6 +176,15 @@ type='text'
         value={oldPrice}
         onChange={(e) => setOldPrice(e.target.value)}
     />
+    <TextField
+        label="Référence"
+        type="text"
+        variant="outlined"
+        size="small"
+        name="reference"
+        value={reference}
+        onChange={(e) => setReference(e.target.value)}
+    />
 </div>
 
 <div className="flex justify-between gap-4">
