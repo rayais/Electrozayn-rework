@@ -6,7 +6,7 @@ const session=require ('../controllers/session.js')
 
 module.exports={
     CreateUser:((req,res)=>{
-     
+     console.log(req.body)
     let passwordHashed=crypto.createHash('sha256').update(req.body.Password, 'utf8').digest('hex')
     let query1=`SELECT * from user where Email="${req.body.Email}"`
      connection.query(query1,(err,results)=>{
