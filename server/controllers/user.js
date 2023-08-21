@@ -25,7 +25,7 @@ module.exports={
         connection.query(query1,(err,result)=>{
           var session=utils.RandomString(32)
           middleware.CreateSession(req,res,result[0].id,session)
-          res.status(200).send(result)
+          // res.status(200).send(result)
 
         })
         
@@ -46,7 +46,6 @@ module.exports={
     })
 }),
 LoginUser :(req,res)=>{
-  console.log(req.body)
   var passwordHashed = crypto.createHash('sha256').update(req.body.Password, 'utf8').digest('hex')
   
   // var repeatepasswordHshed=crypto.createHash('sha256').update(req.body.repeatepassword, 'utf8').digest('hex')

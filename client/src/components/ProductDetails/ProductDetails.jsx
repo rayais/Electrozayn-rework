@@ -58,11 +58,11 @@ const ProductDetails = () => {
 
     const productId = params.id;
     const itemInWishlist = wishlistItems.some((i) => i.product === productId);
-
+    
     
     const addToCartHandler = () => {
         dispatch(addItemsToCart(productId));
-        enqueueSnackbar("Product Added To Cart", { variant: "success" });
+        enqueueSnackbar("Produit ajouté au panier avec succès", { variant: "success" });
     }
 
     const handleDialogClose = () => {
@@ -100,7 +100,7 @@ const ProductDetails = () => {
     // useEffect(() => {
     //     dispatch(getSimilarProducts(product?.catigory));
     // }, [dispatch, product, product.catigory]);
-
+    
     return (
         <>
             {loading ? <Loader /> : (
@@ -117,20 +117,8 @@ const ProductDetails = () => {
                                 {/* <!-- imgbox --> */}
                                 <div className="flex flex-col gap-3 m-3">
                                     <div className="w-full h-full pb-6 border relative">
-                                        <img draggable="false" className="w-full h-80 object-contain" src={product?.product_image} alt={product?.product_name} />
-                                        {/* <Slider {...settings}>
-                                            {product.images && product.images.map((item, i) => (
-                                                <>
-                                                <div className='flex pt-5 cursor-pointer '>
-                                                    <img draggable="false" className="w-full h-20 object-contain" src={item.url} alt={product.name} key={i} />
-                                                    <img draggable="false" className="w-full h-20 object-contain" src={item.url} alt={product.name} key={i} />
-                                                </div>
-                                                </>
-                                            ))}
-                                        </Slider> */}
-                                        {/* <div className="absolute top-4 right-4 shadow-lg bg-white w-9 h-9 border flex items-center justify-center rounded-full">
-                                            <span onClick={addToWishlistHandler} className={`${itemInWishlist ? "text-red-500" : "hover:text-red-500 text-gray-300"} cursor-pointer`}><FavoriteIcon sx={{ fontSize: "18px" }} /></span>
-                                        </div> */}
+                                        <img draggable="false" className="w-full h-80 object-contain transform hover:scale-110 transition-transform duration-150 ease-out" src={product?.product_image} alt={product?.product_name} />
+                                        
                                     </div>
 
                                     <div className="w-full flex gap-3">
@@ -160,16 +148,16 @@ const ProductDetails = () => {
                                 <div className="flex flex-col gap-2 mb-4">
 
                                     <h2 className="text-xl">{product?.product_name}</h2>
-
+                                     <hr />       
                                     {/* <!-- price desc --> */}
-                                    <div className="flex items-baseline gap-2 text-3xl font-medium">
-                                        <span className="text-gray-800">TND {product?.Promo_price ? product?.Promo_price.toLocaleString() : product?.Origin_price?.toLocaleString()}</span>
+                                    <div className="flex items-baseline gap-2 text-xl font-medium">
+                                        <span className="text-gray-800">{(product?.Promo_price !== "0" && product?.Promo_price !== "")  ? product?.Promo_price.toLocaleString() : product?.Origin_price?.toLocaleString()} TND </span>
                                         {/* <span className="text-base text-gray-500 line-through">TND{product.cuttedPrice?.toLocaleString()}</span> */}
                                         {/* <span className="text-base text-primary-green">{getDiscount(product.price, product.cuttedPrice)}%&nbsp;off</span> */}
                                     </div>
-                                    {product?.quantity <= 10 && product?.quantity > 0 && (
+                                    {/* {product?.quantity <= 10 && product?.quantity > 0 && (
                                         <span className="text-red-500 text-sm font-medium">Quantité : {product?.quantity} </span>
-                                    )}
+                                    )} */}
                                     {/* <!-- price desc --> */}
 
                                     {/* <!-- description details --> */}
@@ -209,7 +197,7 @@ const ProductDetails = () => {
 
                         {/* Sliders */}
                         {/* <div className="flex flex-col gap-3 mt-6">
-                            <ProductSlider title={"Similar Products"} tagline={"Based on the category"} />
+                            <ProductSlider prod ={similarProds} title={"Similar Products"} tagline={"Based on the category"} />
                         </div> */}
 
                     </main>

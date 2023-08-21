@@ -2,7 +2,7 @@ import TextField from '@mui/material/TextField';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { resetPassword, clearErrors } from '../../actions/userAction';
+import { resetPassword, clearErrors, clearMessage } from '../../actions/userAction';
 import { useSnackbar } from 'notistack';
 import BackdropLoader from '../Layouts/BackdropLoader';
 import MetaData from '../Layouts/MetaData';
@@ -24,18 +24,15 @@ const ResetPassword = () => {
     e.preventDefault();
 
     if (newPassword.length < 8) {
-      enqueueSnackbar("Password length must be atleast 8 characters", { variant: "warning" });
+      enqueueSnackbar("La longueur du mot de passe doit comporter au moins 8 caractères", { variant: "warning" });
       return;
     }
     if (newPassword !== confirmPassword) {
-      enqueueSnackbar("Password Doesn't Match", { variant: "error" });
+      enqueueSnackbar("Les mots de passe ne correspondent pas..", { variant: "error" });
       return;
     }
 
-    const formData = new FormData();
-    formData.set("password", newPassword);
-    formData.set("confirmPassword", confirmPassword);
-    dispatch(resetPassword(params.token, formData));
+    dispatch(resetPassword(params.token, newPassword, confirmPassword));
   }
 
   useEffect(() => {
@@ -44,7 +41,8 @@ const ResetPassword = () => {
       dispatch(clearErrors());
     }
     if (success) {
-      enqueueSnackbar("Password Updated Successfully", { variant: "success" });
+      enqueueSnackbar("Le mot de passe a été mis à jour avec succès", { variant: "success" });
+      dispatch(clearMessage())
       navigate("/login")
     }
   }, [dispatch, error, success, navigate, enqueueSnackbar]);
@@ -60,13 +58,12 @@ const ResetPassword = () => {
         <div class="flex sm:w-4/6 sm:mt-4 m-auto mb-7 bg-white shadow-lg">
 
           <FormSidebar
-            title="Reset Password"
-            tag="Get access to your Orders, Wishlist and Recommendations"
+            title="Réinitialiser le mot de passe"
           />
 
           {/* <!-- login column --> */}
           <div class="flex-1 overflow-hidden">
-            <h2 className="text-center text-2xl font-medium mt-6 text-gray-800">Reset Password</h2>
+            <h2 className="text-center text-2xl font-medium mt-6 text-gray-800">Réinitialiser</h2>
 
             {/* <!-- edit info container --> */}
             <div class="text-center py-10 px-4 sm:px-14">

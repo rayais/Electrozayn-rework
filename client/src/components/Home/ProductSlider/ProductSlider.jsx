@@ -5,8 +5,7 @@ import { getRandomProducts } from '../../../utils/functions';
 import { settings } from '../DealSlider/DealSlider';
 import Product from './Product';
 
-const ProductSlider = ({ title, tagline }) => {
-
+const ProductSlider = ({ title, tagline}) => {
     const { loading, products } = useSelector((state) => state.products);
     
 
@@ -22,8 +21,8 @@ const ProductSlider = ({ title, tagline }) => {
             </div>
             <hr />
             {loading ? null :
-                <Slider {...settings} className="flex items-center justify-between p-1">
-                    {products && getRandomProducts(products, 12).map((product) => (
+                <Slider {...settings} className="flex items-center justify-between p-1 ">
+                    {prod && getRandomProducts(prod, 12).map((product) => (
                         <Product {...product} key={product._id} />
                     ))}
                 </Slider>

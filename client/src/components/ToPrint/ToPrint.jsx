@@ -2,6 +2,7 @@ import React from 'react';
 import Logo from '../../assets/images/logo.png';
 
 function ToPrint({ rowData }) {
+  console.log(rowData)
   return (
     <div style={{ margin: '1px' }}>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -23,7 +24,9 @@ function ToPrint({ rowData }) {
                     www.electrozayn.com
                     <br />
                     <br />
-                    <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>BON DE COMMANDE</h1>
+                    <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>BON DE COMMANDE</h2>
+                    <h1 style={{ fontSize: '1rem', fontWeight: 'bold' }}>ADRESSE CLIENT:</h1>
+                    <h1 style={{ fontSize: '1rem', fontWeight: 'bold' }}>{rowData.address}</h1>
                     <br />
                   </div>
                 </div>
@@ -31,7 +34,7 @@ function ToPrint({ rowData }) {
             </div>
             <hr style={{ marginTop: '0.5rem', marginBottom: '0.5rem', border: 'none', borderTop: '1px solid #e2e8f0' }} />
             <div style={{ padding: '0.5rem' }}>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '2fr 2fr', gap: '1rem' }}>
                 <div style={{ fontWeight: '600' }}>
                   <span>N° FACTURE</span>
                   <div style={{ marginTop: '0.5rem' }}>{rowData.id}</div>
