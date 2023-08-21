@@ -87,9 +87,7 @@ export const registerUser = (userData) => async (dispatch) => {
        
 
         const { data } = await axios.post(
-            'https://www.electrozayn.com/api/Create_user/electrozayn', config,
-            userData,
-        );
+            'https://www.electrozayn.com/api/Create_user/electrozayn',userData);
 console.log(data)
         dispatch({
             type: REGISTER_USER_SUCCESS,
