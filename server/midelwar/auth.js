@@ -14,7 +14,7 @@ module.exports={
                 expires: new Date(new Date().getTime() + 86400 * 1000),
                 httpOnly: false,
                 Electrozyne: false
-            }).json({ session, success: true, user_id});
+            }).send({ session, success: true, user_id});
             console.log({ session, success: true, user_id})
         } catch (err) {
             res.status(500).json({ success: false, error: err.message });
