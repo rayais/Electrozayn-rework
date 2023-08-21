@@ -66,7 +66,7 @@ const Sidebar = ({ activeTab, setToggleSidebar, user }) => {
     return (
         <aside className="sidebar z-10 sm:z-0 block min-h-screen fixed left-0 pb-14 max-h-screen w-3/4 sm:w-[15%] bg-gray-800 text-white overflow-x-hidden border-r">
             <div className="flex items-center gap-3  p-2 rounded-lg shadow-lg my-4 mx-3.5">
-                <button onClick={()=>setToggleSidebar(true)} className="sm:hidden bg-gray-800 ml-auto rounded-full w-10 h-10 flex items-center justify-center">
+                <button onClick={()=>setToggleSidebar(false)} className="sm:hidden bg-gray-800 ml-auto rounded-full w-10 h-10 flex items-center justify-center">
                     <CloseIcon/>
                 </button>
             </div>
@@ -82,7 +82,7 @@ const Sidebar = ({ activeTab, setToggleSidebar, user }) => {
                                     <span>{label}</span>
                                 </button>
                             ) : (
-                                <Link to={ref} className={`${activeTab === index ? "bg-gray-700" : "hover:bg-gray-700"} flex gap-3 items-center py-3 px-4 font-medium`}>
+                                <Link to={ref} onClick={()=>setToggleSidebar(false)} className={`${activeTab === index ? "bg-gray-700" : "hover:bg-gray-700"} flex gap-3 items-center py-3 px-4 font-medium`}>
                                     <span>{icon}</span>
                                     <span>{label}</span>
                                 </Link>

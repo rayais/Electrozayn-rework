@@ -13,21 +13,20 @@ import { useNavigate } from 'react-router-dom';
 import MetaData from '../Layouts/MetaData';
 import states from '../../utils/states';
 
-const Shipping = () => {
+const Shipping = ({user}) => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { enqueueSnackbar } = useSnackbar();
-    const { user } = useSelector(state => state.user)
     const { cartItems } = useSelector((state) => state.cart);
     const { shippingInfo } = useSelector((state) => state.cart);
 
     const [address, setAddress] = useState();
-    const [email, setEmail] = useState(user?.session[0].Email);
+    const [email, setEmail] = useState(user?.Email);
     const [country, setCountry] = useState("");
     const [state, setState] = useState("");
     const [pincode, setPincode] = useState(null);
-    const [phoneNo, setPhoneNo] = useState(user.session[0].PhoneNumber);
+    const [phoneNo, setPhoneNo] = useState(user?.PhoneNumber);
 
     const itemPrice = cartItems.reduce((total, item) => {
         const price = item.cuttedPrice !== undefined ? item.cuttedPrice : item.price;
@@ -110,7 +109,7 @@ const Shipping = () => {
                                     </div>
 
 
-                                    <button type="submit" className="bg-primary-orange w-full sm:w-1/3 my-2 py-3.5 text-sm font-medium text-white shadow hover:shadow-lg rounded-sm uppercase outline-none">CONFIRMER</button>
+                                    <button type="submit" className="bg-primary-orange w-full sm:w-1/3 my-2 py-3.5 text-sm font-medium text-white shadow hover:shadow-lg rounded-sm uppercase outline-none">CONTINUER</button>
                                 </form>
                             </div>
                         </Stepper>

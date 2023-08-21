@@ -9,11 +9,10 @@ import { useEffect } from 'react';
 import { emptyCart } from '../../actions/cartAction';
 import { newOrder } from '../../actions/orderAction';
 
-const OrderConfirm = () => {
+const OrderConfirm = ({user}) => {
 
     const navigate = useNavigate();
     const { shippingInfo, cartItems } = useSelector((state) => state.cart);
-    const { user } = useSelector(state => state.user)
     const { loading: orderLoading, order, error: orderError } = useSelector((state) => state.newOrder);
     const user_id = localStorage.getItem('id')
     const dispatch = useDispatch();
@@ -33,8 +32,8 @@ const OrderConfirm = () => {
         const totalPrice = totalProdPrice + deliveryFee;
 
         const orderData = {
-            FirstName: user?.session[0].FirstName,
-            Email: user?.session[0].Email,
+            FirstName: user?.FirstName,
+            Email: user?.Email,
             address: shippingInfo.address,
             PhoneNumber: shippingInfo.phoneNo,
             Zip: shippingInfo.pincode,
@@ -68,8 +67,7 @@ const OrderConfirm = () => {
                             ))}
                         </div>
                         <div className="flex justify-between items-center mt-4 bg-white px-6 py-3 rounded-b-sm">
-                            <p className="text-sm">La confirmation de la commande sera envoyé vers <span className="font-medium">{user.session[0].Email}</span></p>
-                            <button onClick={handleConfirm} className="bg-primary-orange px-6 py-2 text-white font-medium rounded-sm shadow hover:shadow-lg uppercase">continue</button>
+                            <button onClick={handleConfirm} className="bg-primary-orange px-6 py-2 text-white font-medium rounded-sm shadow hover:shadow-lg uppercase">confirmer la commande</button>
                         </div>
                     </Stepper>
                 </div>

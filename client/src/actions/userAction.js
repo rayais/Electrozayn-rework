@@ -78,7 +78,7 @@ export const loginUser = (Email, Password) => async (dispatch) => {
 
 // Register User
 export const registerUser = (userData) => async (dispatch) => {
-   
+    console.log(userData)
     try {
 
 
@@ -90,14 +90,15 @@ export const registerUser = (userData) => async (dispatch) => {
             'http://localhost:5500/api/Create_user/electrozayn',
             userData,
         );
+        // console.log({data})
 
         dispatch({
             type: REGISTER_USER_SUCCESS,
-            payload: data.user,
+            payload: data,
         });
 
-        localStorage.setItem("token", data[0]);
-        localStorage.setItem("id", data[2]);
+        localStorage.setItem("token", data?.session);
+        localStorage.setItem("id", data?.user_id);
         
     } catch (error) {
         dispatch({

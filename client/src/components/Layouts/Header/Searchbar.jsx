@@ -16,11 +16,11 @@ const Searchbar = () => {
 
     useEffect(() => {
         if (keyword.trim()) {
-            const results = products.filter(product =>
+            const results = products?.filter(product =>
                 product.product_name.toLowerCase().includes(keyword?.toLowerCase())
             );
 
-            if (results.length > 0) {
+            if (results?.length > 0) {
                 setSearchResults(results);
                 setProductNotFound(false);
                 setDropdownVisible(true); 
@@ -39,9 +39,9 @@ const Searchbar = () => {
         e.preventDefault();
 
         if (keyword.trim()) {
-            dispatch(getAdminProducts());
+            dispatch(getAdminProducts(keyword));
             setKeyword('');
-            navigate(`/products/${products.id}`);
+            navigate(`/products/${keyword}`);
         } 
     };
 

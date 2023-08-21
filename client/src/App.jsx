@@ -104,7 +104,7 @@ function App() {
         {/* order process */}
         <Route path="/shipping" element={
           <ProtectedRoute>
-            <Shipping />
+            <Shipping user= {user}/>
           </ProtectedRoute>
         } ></Route>
 
