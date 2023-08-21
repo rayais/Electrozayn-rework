@@ -15,6 +15,7 @@ module.exports={
                 httpOnly: false,
                 Electrozyne: false
             }).json({ session, success: true, user_id});
+            console.log({ session, success: true, user_id})
         } catch (err) {
             res.status(500).json({ success: false, error: err.message });
         }
