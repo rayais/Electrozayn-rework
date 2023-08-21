@@ -85,16 +85,17 @@ export const registerUser = (userData) => async (dispatch) => {
         dispatch({ type: REGISTER_USER_REQUEST });
 
        
-
-        const { data } = await axios.post(
+ await axios.post(
             'https://www.electrozayn.com/api/Create_user/electrozayn', config,
             userData,
-        );
-console.log(data)
-        dispatch({
-            type: REGISTER_USER_SUCCESS,
-            payload: data.user,
-        });
+        ).then((res)=>{
+            console.log(res)
+        })
+
+        // dispatch({
+        //     type: REGISTER_USER_SUCCESS,
+        //     payload: data.user,
+        // });
 
         localStorage.setItem("token", data[0]);
         localStorage.setItem("id", data[2]);
