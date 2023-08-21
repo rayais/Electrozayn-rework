@@ -47,7 +47,7 @@ module.exports={
         const transporter = nodemailer.createTransport({
             service: "gmail", //replace with your email provider
             port: 587,
-            host: 'localhost:5500', //change it too www.electrozayn.com
+            host: 'www.electrozayn.com', //change it too www.electrozayn.com
             secure: false,
             auth: {
               user: "aymenaymoun86@gmail.com",
@@ -58,7 +58,7 @@ module.exports={
             }
         });
         
-        const url = 'http://localhost:5500' //change it to www.electrozayn.com
+        const url = 'https://www.electrozayn.com' //change it to www.electrozayn.com
         const resetToken = RandomString(64); // Generate a random token
         const resetLink = `${url}/password/reset/${resetToken}`;  //change to wwww.electrozayn.com
     

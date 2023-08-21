@@ -225,7 +225,7 @@ export const forgotPassword = (email) => async (dispatch) => {
         }
 
         const { data } = await axios.post(
-            'http://www.localhost:5500/api/request-password-reset',
+            'https://www.electrozayn.com/api/request-password-reset',
             email,
             config
         );
@@ -256,7 +256,7 @@ export const resetPassword = (token, newPassword, confirmPassword) => async (dis
         }
 
         const { data } = await axios.put(
-            `http://www.localhost:5500/api/password/reset/${token}`,
+            `https://www.electrozayn.com/api/password/reset/${token}`,
             {newPassword, confirmPassword},
             config
         );
