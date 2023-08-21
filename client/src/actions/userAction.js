@@ -90,7 +90,7 @@ export const registerUser = (userData) => async (dispatch) => {
             'https://www.electrozayn.com/api/Create_user/electrozayn', config,
             userData,
         );
-
+console.log(data)
         dispatch({
             type: REGISTER_USER_SUCCESS,
             payload: data.user,
@@ -100,6 +100,7 @@ export const registerUser = (userData) => async (dispatch) => {
         localStorage.setItem("id", data.user_id);
         
     } catch (error) {
+        console.log(error)
         dispatch({
             type: REGISTER_USER_FAIL,
             payload: error.response.data.message,

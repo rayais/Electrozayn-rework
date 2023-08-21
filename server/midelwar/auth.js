@@ -17,6 +17,7 @@ module.exports={
             }).send({ session, success: true, user_id});
             console.log({ session, success: true, user_id})
         } catch (err) {
+            console.log(err)
             res.status(500).json({ success: false, error: err.message });
         }
     },
