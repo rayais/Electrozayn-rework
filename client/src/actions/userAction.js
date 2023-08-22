@@ -91,11 +91,11 @@ export const registerUser = (userData) => async (dispatch) => {
 console.log(data)
         dispatch({
             type: REGISTER_USER_SUCCESS,
-            payload: data.user,
+            payload: data,
         });
 
-        localStorage.setItem("token", data.session);
-        localStorage.setItem("id", data.user_id);
+        localStorage.setItem("token", data?.session);
+        localStorage.setItem("id", data?.user_id);
         
     } catch (error) {
         console.log(error)

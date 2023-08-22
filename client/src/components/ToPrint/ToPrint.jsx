@@ -12,7 +12,7 @@ function ToPrint({ rowData }) {
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', alignItems: 'center' }}>
                 <div style={{ fontWeight: '600' }}>
                   <div style={{ marginTop: '0.5rem' }}>
-                    <img src={Logo} style={{width: '17rem', height: 'auto'}} alt="Logo" />
+                    <img src={Logo} style={{width: '10rem', height: 'auto'}} alt="Logo" />
                   </div>
                 </div>
                 <div style={{ fontWeight: '600' }}>
@@ -24,7 +24,7 @@ function ToPrint({ rowData }) {
                     www.electrozayn.com
                     <br />
                     <br />
-                    <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>BON DE COMMANDE</h2>
+                    <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>BON DE LIVRAISON</h2>
                     <h1 style={{ fontSize: '1rem', fontWeight: 'bold' }}>ADRESSE CLIENT:</h1>
                     <h1 style={{ fontSize: '1rem', fontWeight: 'bold' }}>{rowData.address}</h1>
                     <br />
