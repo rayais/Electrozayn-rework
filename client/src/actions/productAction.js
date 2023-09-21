@@ -191,7 +191,6 @@ export const updateProduct = (id, productData) => async (dispatch) => {
         dispatch({ type: UPDATE_PRODUCT_REQUEST });
         const { data } = await axios.put(`https://www.electrozayn.com/api/update/product/${id}`, productData);
 
-
         dispatch({
             type: UPDATE_PRODUCT_SUCCESS,
             payload: data.success,

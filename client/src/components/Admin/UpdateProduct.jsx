@@ -53,12 +53,14 @@ const UpdateProduct = () => {
 
 
     const newProductSubmitHandler = async (e) => {
+        e.preventDefault()
         const formData = new FormData();
     formData.append("file", productImage);
     formData.append("upload_preset", "ml_default");
     if (productImage.name) {
       await axios
         .post("https://api.cloudinary.com/v1_1/dycjej355/upload", formData).then((res)=>{
+            console.log(res)
            dispatch(updateProduct(params.id,{
             product_name: productName,
             description: description,
@@ -66,7 +68,7 @@ const UpdateProduct = () => {
             stockquantity: stockquantity,
             Promo_price: oldPrice,
             reference: reference,
-            product_image: res.data.url,
+            product_image: res.data.secure_url,
             availibility: availability,
             catigory: catigory,
            }))
@@ -240,7 +242,7 @@ type='text'
                         type="file"
                         // label="Product Image"
                         // value={productImage}
-                        onChange={(e) => setProductImage(e.target.files.item[0])}
+                        onChange={(e) => setProductImage(e.target.files[0])}
                         />
                         Choose Files
                     </label>
