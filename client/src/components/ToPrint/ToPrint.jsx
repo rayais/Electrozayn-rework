@@ -1,12 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Logo from '../../assets/images/logo.png';
 import './BillStyle.css'; // Import a CSS file for styling
 
-function ToPrint({ rowData }) {
+function ToPrint({ rowData, onImageLoad }) {
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
+
+  useEffect(() => {
+    const image = new Image();
+    image.src = Logo;
+    image.onload = () => {
+      setIsImageLoaded(true);
+      onImageLoad();
+    };
+  }, [onImageLoad]);
+
   return (
     <div className="bill-container">
       <div className="bill-header">
-        <img src="https://www.electrozayn.com/assets/logo-654b3dbf.png" className="bill-logo" alt="Logo" style={{width:"250px",heigth:"250px"}} />
+        {isImageLoaded ? (
+          <img src={Logo} className="bill-logo" alt="Logo" style={{ width: "250px", height: "250px" }} />
+        ) : (
+          <div className="placeholder-image" />
+        )}
         <div className="bill-header-info">
           <h1 className="bill-title">ELECTROZAYN</h1>
           <p className="bill-address">
