@@ -152,7 +152,7 @@ const ProductDetails = () => {
                                      <hr />       
                                     {/* <!-- price desc --> */}
                                     <div className="flex items-baseline gap-2 text-xl font-medium">
-                                        <span className="text-gray-800">{(product?.Promo_price !== "0" && product?.Promo_price !== "")  ? product?.Promo_price.toLocaleString() : product?.Origin_price?.toLocaleString()} TND </span>
+                                        {/* <span className="text-gray-800">{(product?.Promo_price !== "0" && product?.Promo_price !== "")  ? product?.Promo_price.toLocaleString() : product?.Origin_price?.toLocaleString()} TND </span> */}
                                         {/* <span className="text-base text-gray-500 line-through">TND{product.cuttedPrice?.toLocaleString()}</span> */}
                                         {/* <span className="text-base text-primary-green">{getDiscount(product.price, product.cuttedPrice)}%&nbsp;off</span> */}
                                     </div>
