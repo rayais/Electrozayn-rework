@@ -133,7 +133,7 @@ connection.query(query,(err,result)=>{
 })
 }),
 AddmoreImageProduct: ((req, res) => {
-  const query = `INSERT INTO product_images (product_image, products_id) VALUES ("${req.body.product_image}", ${req.params.id})`;
+  const query = `INSERT INTO product_images (product_image, products_id) VALUES ("${req.body.product_image}", ${req.params.productId})`;
   connection.query(query, (err, result) => {
     if (err) {
       res.status(500).send(err)
@@ -144,14 +144,14 @@ AddmoreImageProduct: ((req, res) => {
 }),
 
 getAllimages:((req,res)=>{
-  const query=`select * from product_images where products_id=${req.params.id}`
+  const query=`select * from product_images where products_id=${req.params.productId}`
   connection.query(query,(err,result)=>{
     err ? res.status(500).send(err):res.status(201).send(result)
 
   })
 }),
 DeleteImages:((req,res)=>{
-  const query=`delete from product_images where id=${req.params.id}`
+  const query=`delete from product_images where id=${req.params.productId}`
   connection.query(query,(err,result)=>{
     err ? res.status(500).send(err):res.status(202).send("image deleted")
   })

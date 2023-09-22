@@ -28,12 +28,13 @@ import { addToWishlist, removeFromWishlist } from '../../actions/wishlistAction'
 import MinCategory from '../Layouts/MinCategory';
 import MetaData from '../Layouts/MetaData';
 import Categories from '../Layouts/Categories';
+import axios from 'axios';
 
 const ProductDetails = () => {
 
     const dispatch = useDispatch();
     const { enqueueSnackbar } = useSnackbar();
-    
+    const [images, setImages] = useState([]);
     const navigate = useNavigate();
 
     // reviews toggle
@@ -100,7 +101,19 @@ const ProductDetails = () => {
     // useEffect(() => {
     //     dispatch(getSimilarProducts(product?.catigory));
     // }, [dispatch, product, product.catigory]);
-    
+    const addImages=async()=>{
+        const formData = new FormData();
+        formData.append("file", images);
+        formData.append("upload_preset", "ml_default");
+        await axios
+        .post("https://api.cloudinary.com/v1_1/dycjej355/upload", formData)
+        .then((res) => {
+        axios.post('https://www.electrozayn.com/api/add_thumbnailes/images/'+id),{
+            product_image:res.data.res.data.secure_url,
+        }
+        
+        })
+    }
     return (
         <>
             {loading ? <Loader /> : (
@@ -204,6 +217,7 @@ const ProductDetails = () => {
                     </main>
                 </>
             )}
+            <input type="file" onch />
         </>
     );
 };
