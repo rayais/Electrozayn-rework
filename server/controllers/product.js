@@ -45,7 +45,7 @@ module.exports = {
     // Loop through cart items and update the quantity in the database as needed
     cartItems.forEach((cartItem) => {
       console.log(cartItem)
-      const query = `UPDATE products SET stockquantity = stockquantity - ${cartItem.quantity} WHERE id = ${cartItem.id}`;
+      const query = `UPDATE products SET stockquantity = stockquantity - ${cartItem.quantity} WHERE id = ${cartItem.product}`;
       connection.query(query, (err, result) => {
         if (err) {
           res.status(500).send(err);
