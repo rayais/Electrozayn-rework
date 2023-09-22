@@ -71,7 +71,7 @@ const NewProduct = () => {
             stockquantity: stockquantity,
             Promo_price: oldPrice,
             reference: reference,
-            product_image: res.data.url,
+            product_image: res.data.secure_url,
             availibility: availability,
             catigory: catigory
             })
