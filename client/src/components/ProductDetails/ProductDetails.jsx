@@ -99,7 +99,6 @@ const fetchImages=()=>{
     axios
     .get(`https://www.electrozayn.com/api/get_all_images/${productId}`)
     .then((response) => {
-        console.log(response)
       if (response.data  && response.data.length > 0) {
         setThumbnailImages(response.data);
         setPrincipalImage(response.data[0].product_image?response.data[0].product_image:product?.product_image);
