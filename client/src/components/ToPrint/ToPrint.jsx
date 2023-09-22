@@ -6,7 +6,7 @@ function ToPrint({ rowData }) {
   return (
     <div className="bill-container">
       <div className="bill-header">
-        <img src={Logo} className="bill-logo" alt="Logo" style={{width:"250px",heigth:"250px"}} />
+        <img src="https://www.electrozayn.com/assets/logo-654b3dbf.png" className="bill-logo" alt="Logo" style={{width:"250px",heigth:"250px"}} />
         <div className="bill-header-info">
           <h1 className="bill-title">ELECTROZAYN</h1>
           <p className="bill-address">

@@ -47,7 +47,27 @@ const Home = () => {
         <DealSlider title={"PROMOTION"}  products={ledProd}/>
         {/* <DealSlider title={"NOS LED"} products={ledProducts}/> */}
         <DealSlider title={"NOS PRODUITS"} products={products} />
-        
+        {products.map((product) => {
+          const structuredData = {
+            "@context": "http://schema.org",
+            "@type": "Product",
+            "name": product.product_name,
+            "description": product.description,
+            "image": product.product_image,
+            "offers": {
+              "@type": "Offer",
+              "priceCurrency": "TND",
+              "price": product.Promo_price?product.Promo_price:Origin_price,
+              "availability": product.stockquantity>3 ? "http://schema.org/InStock" : "http://schema.org/OutOfStock"
+            }
+          };
+
+          return (
+            <script type="application/ld+json" key={product.id}>
+              {JSON.stringify(structuredData)}
+            </script>
+          );
+        })}
       </main>
     </>
   );
