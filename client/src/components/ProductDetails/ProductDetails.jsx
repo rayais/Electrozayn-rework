@@ -213,7 +213,7 @@ const ProductDetails = () => {
                         <>
                       <div key={index} className="w-1/6 h-20 relative">
                         <img
-                          src={thumbnail.product_image?.product_image}
+                          src={thumbnail.product_image}
                           alt={`Thumbnail ${thumbnail.product_image}`}
                           onClick={() => handleThumbnailClick(thumbnail?.product_image)}
                           className="w-full h-full cursor-pointer"
