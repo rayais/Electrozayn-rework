@@ -95,7 +95,20 @@ const ProductDetails = () => {
     addToCartHandler();
     navigate('/shipping');
   };
-
+const fetchImages=()=>{
+    axios
+    .get(`https://www.electrozayn.com/api/get_all_images/${productId}`)
+    .then((response) => {
+      if (response.data  && response.data.length > 0) {
+        setThumbnailImages(response.data);
+        setPrincipalImage(response.data[0].product_image);
+      }
+    })
+    .catch((error) => {
+      // Handle error
+      console.error('Error fetching images:', error);
+    });
+}
   useEffect(() => {
     if (error) {
       enqueueSnackbar(error, { variant: 'error' });
@@ -111,21 +124,7 @@ const ProductDetails = () => {
     }
     dispatch(getProductDetails(productId));
 
-    axios
-    .get(`https://www.electrozayn.com/api/get_all_images/${productId}`)
-    .then((response) => {
-      if (response.data  && response.data.length > 0) {
-        setThumbnailImages(response.data);
-        setPrincipalImage(response.data[0].product_image);
-      } else {
-        // Handle the case where the response data is not as expected
-        console.error('Invalid response data:', response.data);
-      }
-    })
-    .catch((error) => {
-      // Handle error
-      console.error('Error fetching images:', error);
-    });
+    fetchImages()
   }, [dispatch, productId, error, reviewError, success, enqueueSnackbar]);
 
   const addImages = async () => {
@@ -162,7 +161,7 @@ const ProductDetails = () => {
       .then((response) => {
         // Handle success (e.g., update thumbnailImages state)
        
-        setThumbnailImages();
+        fetchImages();
 
         // If the deleted image was the principal image, set a new principal image if available
         if (principalImage === image && updatedThumbnails.length > 0) {
