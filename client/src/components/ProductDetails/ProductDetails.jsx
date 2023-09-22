@@ -105,7 +105,7 @@ const ProductDetails = () => {
         <>
             {loading ? <Loader /> : (
                 <>
-                {console.log(productId)}
+                
                     <MetaData title={product?.product_name} />
                     <Categories />
                     <main className="mt-12 sm:mt-0">
