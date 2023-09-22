@@ -107,7 +107,7 @@ console.log(data)
 };
 
 // Load User
-export const loadUser = (user_data) => async (dispatch) => {
+export const loadUser = (user_id) => async (dispatch) => {
 
     try {
 
@@ -118,11 +118,11 @@ export const loadUser = (user_data) => async (dispatch) => {
             },
         }
 
-        const { data } = await axios.get('https://www.electrozayn.com/api/user/getone/',config, user_id);
+        const { data } = await axios.get('https://www.electrozayn.com/api/user/getone/'+user_id,config);
 
         dispatch({
             type: LOAD_USER_SUCCESS,
-            payload: data
+            payload: data[0]
         });
 
     } catch (error) {

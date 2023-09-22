@@ -19,7 +19,7 @@ router.delete('/api/delete_shop_card/:id',productController.DeleteAllShopCArd)
 
 router.post("/api/add_thumbnailes/images/:productId",productController.AddmoreImageProduct)
 router.get("/api/get_all_images/:productId",productController.getAllimages)
-router.delete("/api/delete_images/:productId",productController.DeleteImages)
+router.delete("/api/delete_images/:id",productController.DeleteImages)
 
 module.exports={PosteRouter:router};
 
