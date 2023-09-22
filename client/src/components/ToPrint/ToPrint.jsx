@@ -17,12 +17,15 @@ function ToPrint({ rowData, onImageLoad }) {
   return (
     <div className="bill-container">
       <div className="bill-header">
-        {isImageLoaded ? (
+        <div className='row'>
+          <div className='col-4'>
+          {isImageLoaded ? (
           <img src={Logo} className="bill-logo" alt="Logo" style={{ width: "250px", height: "250px" }} />
         ) : (
           <div className="placeholder-image" />
         )}
-        <div className="bill-header-info">
+          </div>
+          <div className='col-6'>
           <h1 className="bill-title">ELECTROZAYN</h1>
           <p className="bill-address">
             Rue d'Athènes, 1 Rue de Piree, Tunis 1001<br />
@@ -32,6 +35,11 @@ function ToPrint({ rowData, onImageLoad }) {
               www.electrozayn.com
             </a>
           </p>
+          </div>
+        </div>
+        
+        <div className="bill-header-info">
+         
           <h2 className="bill-heading">BON DE LIVRAISON</h2>
           <h1 className="bill-subheading">ADRESSE CLIENT:</h1>
           <h1 className="bill-address-details">{rowData.address}</h1>
