@@ -44,7 +44,7 @@ module.exports = {
     const cartItems = req.body.cartItemss; // Correctly parse cart items from req.body
     // Loop through cart items and update the quantity in the database as needed
     cartItems.forEach((cartItem) => {
-      const query = `UPDATE products SET quantity = quantity - ${cartItem.quantity} WHERE id = ${cartItem.product}`;
+      const query = `UPDATE products SET stockquantity = stockquantity - ${cartItem.quantity} WHERE id = ${cartItem.id}`;
       connection.query(query, (err, result) => {
         if (err) {
           res.status(500).send(err);
@@ -85,17 +85,17 @@ removefromcard: ((req, res) => {
     }
   });
 }),
-UpdateStockquantity:((req, res) => {
-  const query = `UPDATE products SET stockquantity = ${req.body.stockQuantity} WHERE id =${req.params.id}`;
+// UpdateStockquantity:((req, res) => {
+//   const query = `UPDATE products SET stockquantity = ${req.body.stockQuantity} WHERE id =${req.params.id}`;
 
-  connection.query(query,(error, results) => {
-    if (error) {
-      console.error('Error updating stock quantity:', error);
-      return res.status(500).json({ error: 'Failed to update stock quantity' });
-    }
-    return res.json({ message: 'Stock quantity updated successfully' });
-  });
-  }),
+//   connection.query(query,(error, results) => {
+//     if (error) {
+//       console.error('Error updating stock quantity:', error);
+//       return res.status(500).json({ error: 'Failed to update stock quantity' });
+//     }
+//     return res.json({ message: 'Stock quantity updated successfully' });
+//   });
+//   }),
 
 getCard: (req, res) => {
   const query = `SELECT * FROM products WHERE id IN (SELECT products_id FROM shopcard WHERE check_add_or_not = ${true} and user_id=${req.params.id} )`;

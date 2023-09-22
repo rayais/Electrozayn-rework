@@ -9,7 +9,7 @@ router.delete("/api/delete/product/:id",productController.DeleteProduct);
 router.get('/api/get_one_product/:id',productController.GetOnePRoduct)
 router.put('/api/remove_from_card/products/:id',productController.removefromcard);
  router.post('/api/add_to_card/products/:id',productController.AddToCart);
- router.put('/api/update/Stockquantity/:id',productController.UpdateStockquantity)
+//  router.put('/api/update/Stockquantity/:id',productController.UpdateStockquantity)
 
  router.get('/api/get_product/card/:id',productController.getCard);
  router.get('/api/get_all_shopcard/card',productController.getCardalllshopcard);
