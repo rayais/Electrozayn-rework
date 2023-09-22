@@ -95,20 +95,24 @@ const ProductDetails = () => {
     addToCartHandler();
     navigate('/shipping');
   };
-const fetchImages=()=>{
+  const fetchImages = () => {
     axios
-    .get(`https://www.electrozayn.com/api/get_all_images/${productId}`)
-    .then((response) => {
-      if (response.data  && response.data.length > 0) {
-        setThumbnailImages(response.data);
-        setPrincipalImage(response.data[0].product_image?response.data[0].product_image:product?.product_image);
-      }
-    })
-    .catch((error) => {
-      // Handle error
-      console.error('Error fetching images:', error);
-    });
-}
+      .get(`https://www.electrozayn.com/api/get_all_images/${productId}`)
+      .then((response) => {
+        if (response.data && response.data.length > 0) {
+          setThumbnailImages(response.data);
+          // Check if the principal image is empty or not set
+          if (!principalImage || !response.data.some(image => image.product_image === principalImage)) {
+            // If empty or not found, set the principal image to the product.product_image
+            setPrincipalImage(product?.product_image);
+          }
+        }
+      })
+      .catch((error) => {
+        // Handle error
+        console.error('Error fetching images:', error);
+      });
+  };
   useEffect(() => {
     if (error) {
       enqueueSnackbar(error, { variant: 'error' });
@@ -209,8 +213,8 @@ const fetchImages=()=>{
                         <>
                       <div key={index} className="w-1/6 h-20 relative">
                         <img
-                          src={thumbnail?.product_image}
-                          alt={`Thumbnail ${index}`}
+                          src={thumbnail.product_image?.product_image}
+                          alt={`Thumbnail ${thumbnail.product_image}`}
                           onClick={() => handleThumbnailClick(thumbnail?.product_image)}
                           className="w-full h-full cursor-pointer"
                         />
