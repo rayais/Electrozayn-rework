@@ -45,7 +45,7 @@ const ProductDetails = () => {
   const [images, setImages] = useState([]);
   const navigate = useNavigate();
   const [thumbnailImages, setThumbnailImages] = useState([]);
-  const [principalImage, setPrincipalImage] = useState('');
+  const [principalImage, setPrincipalImage] = useState();
   const { productId } = useParams();
 
   // reviews toggle
@@ -99,9 +99,10 @@ const fetchImages=()=>{
     axios
     .get(`https://www.electrozayn.com/api/get_all_images/${productId}`)
     .then((response) => {
+        console.log(response)
       if (response.data  && response.data.length > 0) {
         setThumbnailImages(response.data);
-        setPrincipalImage(response.data[0].product_image);
+        setPrincipalImage(response.data[0].product_image?response.data[0].product_image:product?.product_image);
       }
     })
     .catch((error) => {
@@ -142,10 +143,11 @@ const fetchImages=()=>{
         {
           product_image: response.data.secure_url,
         }
-      );
+      ).then((res)=>{
+        fetchImages()
+      })
 
       // After successfully adding the image, you can update the thumbnailImages state
-      setThumbnailImages([...thumbnailImages, response.data.secure_url]);
     } catch (error) {
       console.error('Error uploading image:', error);
     }
@@ -164,11 +166,7 @@ const fetchImages=()=>{
         fetchImages();
 
         // If the deleted image was the principal image, set a new principal image if available
-        if (principalImage === image && updatedThumbnails.length > 0) {
-          setPrincipalImage(updatedThumbnails[0]);
-        } else if (updatedThumbnails.length === 0) {
-          setPrincipalImage(''); // No thumbnails left
-        }
+       
       })
       .catch((error) => {
         // Handle error
@@ -212,9 +210,9 @@ const fetchImages=()=>{
                         <>
                       <div key={index} className="w-1/6 h-20 relative">
                         <img
-                          src={thumbnail}
+                          src={thumbnail?.product_image}
                           alt={`Thumbnail ${index}`}
-                          onClick={() => handleThumbnailClick(thumbnail)}
+                          onClick={() => handleThumbnailClick(thumbnail?.product_image)}
                           className="w-full h-full cursor-pointer"
                         />
                         
