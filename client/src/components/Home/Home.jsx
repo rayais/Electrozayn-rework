@@ -28,16 +28,23 @@ const Home = () => {
   
   const ledProd = products && products.filter((prod) => prod.catigory.includes('led'));
   const TrotinetteProds = products && products.filter((prod) => prod.catigory === "accessoires trottinette et velo électrique" );
-
+  const currentDate = new Date();
+  currentDate.setDate(currentDate.getDate() - 10);
+  
+  // Filter products created within the last 10 days
+  const newProducts = products.filter((prod) => {
+    const productDate = new Date(prod.created_at);
+    return productDate >= currentDate;
+  });
   return (
     <>
       <MetaData title="Electrozayn - Le monde des composants électronique et de l'électronique Tunisie"/>
       <Categories />
       <main className="flex flex-col gap-3 px-2 mt-5 sm:mt-2">
         <Banner />
+        <DealSlider title={"nouveaux produits".toUpperCase()} products={newProducts}/>
         <DealSlider title={"TROTTINETTE ET VELO ELECTRIQUE"}  products={TrotinetteProds}/>
         <DealSlider title={"PROMOTION"}  products={ledProd}/>
-        {/* {!loading && <ProductSlider title={"PROMOTION"} products={products} tagline={"PRODUITS TENDANCE"} />} */}
         {/* <DealSlider title={"NOS LED"} products={ledProducts}/> */}
         <DealSlider title={"NOS PRODUITS"} products={products} />
         

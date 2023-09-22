@@ -8,7 +8,7 @@ import { useSnackbar } from 'notistack';
 import { useEffect } from 'react';
 import { emptyCart } from '../../actions/cartAction';
 import { newOrder } from '../../actions/orderAction';
-
+import axios from 'axios'
 const OrderConfirm = ({user}) => {
 
     const navigate = useNavigate();
@@ -19,6 +19,14 @@ const OrderConfirm = ({user}) => {
     const { enqueueSnackbar } = useSnackbar();
 
     const handleConfirm = () => {
+        const cartItemss = JSON.parse(localStorage.getItem('cartItems')) || [];
+        axios.put(`https://www.electrozayn.com/api/update/quantity`, {
+            cartItemss,
+          })
+            .then((res) => console.log(res))
+            .catch((error) => console.error(error));
+          
+
         const deliveryFee = cartItems.reduce((fee, item) => {
             const itemPrice = item.cuttedPrice ? item.cuttedPrice : item.price;
             return fee + (itemPrice * item.quantity);

@@ -33,7 +33,7 @@ const ProductDetails = () => {
 
     const dispatch = useDispatch();
     const { enqueueSnackbar } = useSnackbar();
-    const params = useParams();
+    
     const navigate = useNavigate();
 
     // reviews toggle
@@ -56,7 +56,7 @@ const ProductDetails = () => {
         nextArrow: <NextBtn />,
     };
 
-    const productId = params.id;
+    const {productId} = useParams();
     const itemInWishlist = wishlistItems.some((i) => i.product === productId);
     
     

@@ -34,17 +34,27 @@ module.exports = {
       catigory,
     } = req.body;
 
-    const query = `UPDATE products SET product_name="${product_name}",description="${description}",Origin_price="${Origin_price}",quantity=${1},stockquantity="${req.body.stockquantity}",Promo_price="${Promo_price}",reference="${reference}",product_image="${product_image}",availibility="${availibility}",catigory="${catigory}" WHERE id=${req.params.id}`;
+    const query = `UPDATE products SET product_name="${product_name}",description="${description}",Origin_price="${Origin_price}",quantity=${1},stockquantity="${stockquantity}",Promo_price="${Promo_price}",reference="${reference}",product_image="${product_image}",availibility="${availibility}",catigory="${catigory}" WHERE id=${req.params.id}`;
     connection.query(query, (err, result) => {
       err ? res.status(500).send(err) : res.status(201).send("product updated");
     });
   },
-  updatequantity:((req,res)=>{
-     const query=`UPDATE products SET quantity = quantity - ${req.body.quantity} WHERE id = ${req.params.id}`
-     connection.query(query,(err,result)=>{
-      err?res.status(500).send(err):res.status(201).send("Quantity Updated")
-     })
-  }),
+  updatequantity: (req, res) => {
+    console.log(req.body)
+    const cartItems = req.body.cartItemss; // Correctly parse cart items from req.body
+    // Loop through cart items and update the quantity in the database as needed
+    cartItems.forEach((cartItem) => {
+      const query = `UPDATE products SET quantity = quantity - ${cartItem.quantity} WHERE id = ${cartItem.product}`;
+      connection.query(query, (err, result) => {
+        if (err) {
+          res.status(500).send(err);
+        } else {
+          res.status(201).send("Quantity Updated");
+        }
+      });
+    });
+  },
+  
   DeleteProduct: (req, res) => {
     const query = `DELETE FROM products WHERE id=${req.params.id}`;
     connection.query(query, (err, result) => {
