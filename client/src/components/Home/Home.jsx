@@ -57,7 +57,7 @@ const Home = () => {
             "offers": {
               "@type": "Offer",
               "priceCurrency": "TND",
-              "price": product.Promo_price?product.Promo_price:Origin_price,
+              "price": product.Promo_price>0?product.Promo_price:product.Origin_price,
               "availability": product.stockquantity>3 ? "http://schema.org/InStock" : "http://schema.org/OutOfStock"
             }
           };
