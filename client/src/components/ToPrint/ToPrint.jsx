@@ -6,13 +6,13 @@ function ToPrint({ rowData }) {
   return (
     <div className="bill-container">
       <div className="bill-header">
-        <img src={Logo} className="bill-logo" alt="Logo" />
+        <img src={Logo} className="bill-logo" alt="Logo" style={{width:"250px",heigth:"250px"}} />
         <div className="bill-header-info">
           <h1 className="bill-title">ELECTROZAYN</h1>
           <p className="bill-address">
             Rue d'Athènes, 1 Rue de Piree, Tunis 1001<br />
             +216 51 511 966<br />
-            Electrozayne@gmail.com
+            Electrozayne@gmail.com<br />
             <a href="https://www.electrozayn.com" className="bill-website">
               www.electrozayn.com
             </a>
