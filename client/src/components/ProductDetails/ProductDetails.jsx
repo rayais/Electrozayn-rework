@@ -1,3 +1,5 @@
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { useSnackbar } from 'notistack';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -41,16 +43,8 @@ import { loadUser } from '../../actions/userAction';
 
 const ProductDetails = () => {
   const dispatch = useDispatch();
-  const { enqueueSnackbar } = useSnackbar();
-  const [images, setImages] = useState([]);
-  const navigate = useNavigate();
-  const [thumbnailImages, setThumbnailImages] = useState([]);
-  const [principalImage, setPrincipalImage] = useState();
   const { productId } = useParams();
-
-  // reviews toggle
-  const [open, setOpen] = useState(false);
-
+  const navigate = useNavigate();
   const { product, loading, error } = useSelector(
     (state) => state.productDetails
   );
@@ -60,77 +54,39 @@ const ProductDetails = () => {
   const { cartItems } = useSelector((state) => state.cart);
   const { wishlistItems } = useSelector((state) => state.wishlist);
 
-  const settings = {
-    autoplay: true,
-    autoplaySpeed: 2000,
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    prevArrow: <PreviousBtn />,
-    nextArrow: <NextBtn />,
-  };
+  const [images, setImages] = useState([]);
+  const [principalImage, setPrincipalImage] = useState(product?.product_image);
+  const [thumbnailImages, setThumbnailImages] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [imageIndex, setImageIndex] = useState(0);
 
-  const itemInWishlist = wishlistItems.some((i) => i.product === productId);
+  const user = useSelector((state) => state.user.user);
 
-  const addToCartHandler = () => {
-    dispatch(addItemsToCart(productId));
-    enqueueSnackbar('Produit ajouté au panier avec succès', {
-      variant: 'success',
-    });
-  };
+  useEffect(() => {
+    const user_id = localStorage.getItem('id');
+    dispatch(loadUser(user_id));
+  }, [dispatch]);
 
-  const handleDialogClose = () => {
-    setOpen(!open);
-  };
-
-  const itemInCart = cartItems.some((item) => item.product === productId);
-
-  const goToCart = () => {
-    navigate('/cart');
-  };
-
-  const buyNow = () => {
-    addToCartHandler();
-    navigate('/shipping');
-  };
   const fetchImages = () => {
     axios
       .get(`https://www.electrozayn.com/api/get_all_images/${productId}`)
       .then((response) => {
         if (response.data && response.data.length > 0) {
           setThumbnailImages(response.data);
-          // Check if the principal image is empty or not set
-          if (!principalImage || !response.data.some(image => image.product_image === principalImage)) {
-            // If empty or not found, set the principal image to the product.product_image
+          if (
+            !principalImage ||
+            !response.data.some(
+              (image) => image.product_image === principalImage
+            )
+          ) {
             setPrincipalImage(product?.product_image);
           }
         }
       })
       .catch((error) => {
-        // Handle error
         console.error('Error fetching images:', error);
       });
   };
-  useEffect(() => {
-    if (error) {
-      enqueueSnackbar(error, { variant: 'error' });
-      dispatch(clearErrors());
-    }
-    if (reviewError) {
-      enqueueSnackbar(reviewError, { variant: 'error' });
-      dispatch(clearErrors());
-    }
-    if (success) {
-      enqueueSnackbar('Review Submitted Successfully', { variant: 'success' });
-      dispatch({ type: NEW_REVIEW_RESET });
-    }
-    dispatch(getProductDetails(productId));
-
-    fetchImages()
-  }, [dispatch, productId, error, reviewError, success, enqueueSnackbar]);
-
   const addImages = async () => {
     const formData = new FormData();
     formData.append('file', images);
@@ -156,81 +112,128 @@ const ProductDetails = () => {
     }
   };
 
-  const handleThumbnailClick = (image) => {
+  const handleThumbnailClick = (image, index) => {
     setPrincipalImage(image);
+    setImageIndex(index);
   };
+
+  const handleArrowClick = (direction) => {
+    if (thumbnailImages.length <= 1) {
+      // No need to change the image if there's only one thumbnail.
+      return;
+    }
+  
+    const newIndex = (imageIndex + direction + thumbnailImages.length) % thumbnailImages.length;
+    const newImage = thumbnailImages[newIndex].product_image;
+    setPrincipalImage(newImage);
+    setImageIndex(newIndex);
+  };
+  
 
   const handleDeleteImage = (id) => {
     axios
       .delete(`https://www.electrozayn.com/api/delete_images/${id}`)
       .then((response) => {
-        // Handle success (e.g., update thumbnailImages state)
-       
         fetchImages();
-
-        // If the deleted image was the principal image, set a new principal image if available
-       
       })
       .catch((error) => {
-        // Handle error
         console.error('Error deleting image:', error);
       });
   };
-  const { user } = useSelector(state => state.user)
 
   useEffect(() => {
-    const user_id=localStorage.getItem('id')
-     dispatch(loadUser(user_id))
-      
-  }, [dispatch]);
+    if (error) {
+      console.error('Product Details Error:', error);
+      // Handle the error, e.g., show an error message
+    }
+    if (reviewError) {
+      console.error('Review Error:', reviewError);
+      // Handle the review error, e.g., show an error message
+    }
+    if (success) {
+      console.log('Review Submitted Successfully');
+      // Handle the successful review submission, e.g., show a success message
+    }
+    dispatch(getProductDetails(productId));
+    fetchImages();
+  }, [dispatch, productId, error, reviewError, success]);
 
+  const addToCartHandler = () => {
+    dispatch(addItemsToCart(productId));
+    // Handle cart addition success, e.g., show a success message
+  };
+
+  const goToCart = () => {
+    navigate('/cart');
+  };
+
+  const buyNow = () => {
+    addToCartHandler();
+    navigate('/shipping');
+  };
+
+  const itemInCart = cartItems.some((item) => item.product === productId);
+  const itemInWishlist = wishlistItems.some((i) => i.product === productId);
 
   return (
     <>
       {loading ? (
-        <Loader />
+        // Show a loader or loading spinner
+        <div>Loading...</div>
       ) : (
         <>
           <MetaData title={product?.product_name} />
           <Categories />
           <main className="mt-12 sm:mt-0">
-            {/* <!-- product image & description container --> */}
             <div className="w-full flex flex-col sm:flex-row bg-white sm:p-2 relative">
-              {/* <!-- image wrapper --> */}
               <div className="w-full sm:w-2/5 sm:sticky top-16 sm:h-screen">
-                {/* <!-- imgbox --> */}
                 <div className="flex flex-col gap-3 m-3">
-                  <div className="w-full h-full pb-6 border relative">
+                  <div className="w-full h-80 pb-6 border relative">
                     <img
                       draggable="false"
                       className="w-full h-80 object-contain transform hover:scale-110 transition-transform duration-150 ease-out"
                       src={principalImage || product?.product_image}
                       alt={product?.product_name}
                     />
+                    <div
+                      className="absolute top-1/2 left-0 transform -translate-y-1/2 cursor-pointer"
+                      onClick={() => handleArrowClick(-1)}
+                    >
+                      <KeyboardArrowLeftIcon fontSize="large" />
+                    </div>
+                    <div
+                      className="absolute top-1/2 right-0 transform -translate-y-1/2 cursor-pointer"
+                      onClick={() => handleArrowClick(1)}
+                    >
+                      <KeyboardArrowRightIcon fontSize="large" />
+                    </div>
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {thumbnailImages.map((thumbnail, index) => (
-                        <>
                       <div key={index} className="w-1/6 h-20 relative">
                         <img
                           src={thumbnail.product_image}
                           alt={`Thumbnail ${thumbnail.product_image}`}
-                          onClick={() => handleThumbnailClick(thumbnail?.product_image)}
+                          onClick={() =>
+                            handleThumbnailClick(
+                              thumbnail.product_image,
+                              index
+                            )
+                          }
                           className="w-full h-full cursor-pointer"
                         />
-                        
+                        {user?.role === 'admin' ? (
+                          <button
+                            onClick={() => handleDeleteImage(thumbnail.id)}
+                            className="text-red-500"
+                          >
+                            Delete
+                          </button>
+                        ) : null}
                       </div>
-                     {user?.role==="admin"? <button
-                          onClick={() => handleDeleteImage(thumbnail.id)} // Implement this function
-                          className="text-red-500"
-                        >
-                          Delete
-                        </button>:null}
-                      </>
                     ))}
                   </div>
                   <div className="w-full flex gap-3">
-                    {/* <!-- add to cart btn --> */}
                     {product?.stockquantity > 0 && (
                       <button
                         onClick={itemInCart ? goToCart : addToCartHandler}
@@ -242,32 +245,25 @@ const ProductDetails = () => {
                     )}
                     <button
                       onClick={buyNow}
-                      disabled={product?.stockquantity < 1 ? true : false}
-                      className={
+                      disabled={product?.stockquantity < 1}
+                      className={`p-4 w-1/2 flex items-center justify-center gap-2 text-white rounded-sm shadow hover:shadow-lg ${
                         product?.stockquantity < 1
-                          ? 'p-4 w-full flex items-center justify-center gap-2 text-white bg-red-600 cursor-not-allowed rounded-sm shadow hover:shadow-lg'
-                          : 'p-4 w-1/2 flex items-center justify-center gap-2 text-white bg-primary-orange rounded-sm shadow hover:shadow-lg'
-                      }
+                          ? 'bg-red-600 cursor-not-allowed'
+                          : 'bg-primary-orange'
+                      }`}
                     >
                       <FlashOnIcon />
                       {product?.stockquantity < 1
-                        ? 'OUT OF STOCK'
-                        : 'COMMANDER'}
+                        ? 'RUPTURE DE STOCK'
+                        : 'ACHETER MAINTENANT'}
                     </button>
-                    {/* <!-- add to cart btn --> */}
                   </div>
                 </div>
-                {/* <!-- imgbox --> */}
               </div>
-              {/* <!-- image wrapper --> */}
-
-              {/* <!-- product desc wrapper --> */}
               <div className="flex-1 py-2 px-3">
-                {/* <!-- whole product description --> */}
                 <div className="flex flex-col gap-2 mb-4">
                   <h2 className="text-xl">{product?.product_name}</h2>
                   <hr />
-                  {/* <!-- price desc --> */}
                   <div className="flex items-baseline gap-2 text-xl font-medium">
                     <span className="text-gray-800">
                       {product?.Promo_price !== '0' &&
@@ -277,16 +273,10 @@ const ProductDetails = () => {
                       TND{' '}
                     </span>
                   </div>
-                  {/* <!-- price desc --> */}
-
-                  {/* <!-- description details --> */}
                   <div className="flex flex-col sm:flex-row gap-1 sm:gap-14 mt-4 items-stretch text-sm">
-                    <p className="text-gray-500 font-medium">Réference</p>
+                    <p className="text-gray-500 font-medium">Référence</p>
                     <span>{product?.reference}</span>
                   </div>
-                  {/* <!-- description details --> */}
-
-                  {/* <!-- Service details --> */}
                   <div className="flex flex-col sm:flex-row gap-1 sm:gap-14 mt-4 items-stretch text-sm">
                     <p className="text-gray-500 font-medium">Catégorie</p>
                     <ul className="flex flex-col gap-2">
@@ -300,9 +290,6 @@ const ProductDetails = () => {
                       </li>
                     </ul>
                   </div>
-                  {/* <!-- Service details --> */}
-
-                  {/* <!-- border box --> */}
                   <div className="w-full mt-6 rounded-sm border flex flex-col">
                     <h1 className="px-6 py-4 border-b text-2xl font-medium">
                       Description du produit
@@ -311,32 +298,23 @@ const ProductDetails = () => {
                       <p className="text-sm">{product?.description}</p>
                     </div>
                   </div>
-                  {/* <!-- border box --> */}
                 </div>
               </div>
-              {/* <!-- product desc wrapper --> */}
             </div>
-            {/* <!-- product image & description container --> */}
-
-            {/* Sliders */}
-            {/* <div className="flex flex-col gap-3 mt-6">
-                            <ProductSlider prod ={similarProds} title={"Similar Products"} tagline={"Based on the category"} />
-                        </div> */}
-            {user?.role==="admin"?
-            <>
+            {user?.role === 'admin' && (
+              <>
                 <button
-              onClick={addImages}
-              className="bg-primary-green px-6 py-2 text-white font-medium rounded-sm shadow hover:shadow-lg uppercase"
-            >
-              Ajouter image
-            </button>
-
-            <input
-              type="file"
-              onChange={(e) => setImages(e.target.files[0])}
-            />
-            </>:null
-            }
+                  onClick={addImages}
+                  className="bg-primary-green px-6 py-2 text-white font-medium rounded-sm shadow hover:shadow-lg uppercase"
+                >
+                  Ajouter image
+                </button>
+                <input
+                  type="file"
+                  onChange={(e) => setImages(e.target.files[0])}
+                />
+              </>
+            )}
           </main>
         </>
       )}
