@@ -6,7 +6,7 @@ import Register from './components/User/Register';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { loadUser } from './actions/userAction';
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import UpdateProfile from './components/User/UpdateProfile';
 import UpdatePassword from './components/User/UpdatePassword';
 import ForgotPassword from './components/User/ForgotPassword';
@@ -42,21 +42,15 @@ import axios from 'axios';
 function App() {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
-  const user_id = localStorage.getItem("id");
-  const [user, setUser] = useState({});
-  const [role, setRole] = useState("");
+
   
   useEffect(() => {
+    const user_id = localStorage.getItem("id");
     if (user_id) {
-    axios
-      .get("https://www.electrozayn.com/api/user/getone/" + user_id)
-      .then((res) => {
-        setUser(res.data[0]);
-        setRole(res.data[0].role)
-        
-      }) 
-    };
-  }, [user_id]);
+    dispatch(loadUser(user_id))
+    }
+  }, [dispatch]);
+  const { loading, isAuthenticated, user } = useSelector(state => state.user);
 
   useEffect(() => {
     WebFont.load({
@@ -89,7 +83,7 @@ function App() {
   
   return (
     <>
-      <Header user= {user} role = {role}/>
+      <Header user= {user} role = {user?.role}/>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />

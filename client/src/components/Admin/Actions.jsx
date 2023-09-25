@@ -7,6 +7,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import Print from '@mui/icons-material/Print';
 import ToPrint from '../ToPrint/ToPrint'; // Make sure to import your ToPrint component
+import { Link } from 'react-router-dom';
 // ... (other imports) ...
 
 const Actions = ({ id, deleteHandler, name, editRoute, rowData }) => {
