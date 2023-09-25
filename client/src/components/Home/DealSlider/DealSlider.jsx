@@ -50,7 +50,7 @@ const DealSlider = ({ title, products }) => {
             {/* <!-- header --> */}
             <div className="flex px-6 py-3 justify-between items-center bg-primary-blue">
                 <h1 className="text-xl font-medium">{title}</h1>
-                <Link to="/products" className="bg-white text-xs font-medium text-black px-5 py-2.5 rounded-sm shadow-lg">VOIR PLUS</Link>
+                <Link to={`/products/${title}`} className="bg-white text-xs font-medium text-black px-5 py-2.5 rounded-sm shadow-lg">VOIR PLUS</Link>
             </div>
             <hr />
             {/* <!-- header --> */}

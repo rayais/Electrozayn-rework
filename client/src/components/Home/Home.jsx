@@ -27,7 +27,7 @@ const Home = () => {
 
   
   const ledProd = products && products.filter((prod) => prod.catigory.includes('led'));
-  const TrotinetteProds = products && products.filter((prod) => prod.catigory === "accessoires trottinette et velo électrique" );
+  const TrotinetteProds = products && products.filter((prod) => prod.catigory === "Accessoires trottinette et vélo électrique" );
   const currentDate = new Date();
   currentDate.setDate(currentDate.getDate() - 10);
   
