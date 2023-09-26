@@ -16,83 +16,74 @@ function ToPrint({ rowData, onImageLoad }) {
 
   return (
     <div className="bill-container">
+      {console.log(rowData)}
       <div className="bill-header">
-        <div className='row'>
-          <div className='col-4'>
+      <div className='row'>
+          <div className='col-3'>
           {isImageLoaded ? (
-          <img src={Logo} className="bill-logo" alt="Logo" style={{ width: "250px", height: "250px" }} />
+          <img src={Logo} className="bill-logo" alt="Logo" style={{ width: "180px", height: "180px" }} />
         ) : (
           <div className="placeholder-image" />
         )}
           </div>
+          <div className='col-8' style={{display:"flex",padding:'10px',border:"solid 2px",flexWrap:"wrap"}}>
+           <div className='col-4'>
+           Bon de livraison N° : {rowData.id}
+          </div>
           <div className='col-6'>
-          <h1 className="bill-title">ELECTROZAYN</h1>
-          <p className="bill-address">
-            Rue d'Athènes, 1 Rue de Piree, Tunis 1001<br />
-            +216 51 511 966<br />
-            Electrozayne@gmail.com<br />
-            <a href="https://www.electrozayn.com" className="bill-website">
-              www.electrozayn.com
-            </a>
-          </p>
+           Date : {rowData.date}
+          </div>
+          <div className='col-12'>
+          <h5>Client : {rowData.userName} </h5>
+           <h5>Tél : {rowData.phone}</h5>
+           <h5>Adresse : {rowData.address} </h5>
+           <h5>Email : {rowData.email} </h5>
+          </div>
           </div>
         </div>
-        
-        <div className="bill-header-info">
-         
-          <h2 className="bill-heading">BON DE LIVRAISON</h2>
-          <h1 className="bill-subheading">ADRESSE CLIENT:</h1>
-          <h1 className="bill-address-details">{rowData.address}</h1>
-        </div>
-      </div>
-      <hr className="bill-divider" />
-      <div className="bill-details">
-        <div className="bill-details-row">
-          <div className="bill-detail">
-            <span className="bill-detail-label">N° FACTURE</span>
-            <div className="bill-detail-value">{rowData.id}</div>
-          </div>
-          <div className="bill-detail">
-            <span className="bill-detail-label">DATE</span>
-            <div className="bill-detail-value">{rowData.date}</div>
-          </div>
-        </div>
-        <hr className="bill-divider" />
-        <table className="bill-table">
-          <thead>
-            <tr>
-              <th className="bill-table-header">PRODUITS</th>
-              <th className="bill-table-header">QUANTITE</th>
-              <th className="bill-table-header">PRIX</th>
-            </tr>
-          </thead>
-          <tbody>
-            {rowData?.products?.map((prod, i) => (
-              <tr key={i}>
-                <td className="bill-table-cell">{prod.productName}</td>
-                <td className="bill-table-cell">{prod.productQuantity}</td>
-                <td className="bill-table-cell">{prod.product_price}</td>
-              </tr>
-            ))}
-            <tr>
-              <td className="bill-table-cell" colSpan={2}>
-                Total:
-              </td>
-              <td className="bill-table-cell">{rowData?.total_price} TND</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <hr className="bill-divider" />
-      <div className="bill-footer">
-        <div className="bill-footer-info">
-          ELECTROZAYN<br />
+        <div className='row'>
+          <div className='col-3'>
           Addresse : Rue d'Athènes, 1 Rue de, Rue Piree, Tunis 1001<br />
           TLE: +216 51 511 966<br />
           <a href="https://www.electrozayn.com" className="bill-website">
             www.electrozayn.com
           </a>
+          </div>
+          
         </div>
+        <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: '20px' }}>
+  <thead>
+    <tr style={{ backgroundColor: '#333', color: '#fff' }}>
+      <th style={{ padding: '10px', textAlign: 'left' }}>PRODUITS</th>
+      <th style={{ padding: '10px', textAlign: 'left' }}>QUANTITE</th>
+      <th style={{ padding: '10px', textAlign: 'left' }}>PRIX</th>
+    </tr>
+  </thead>
+  <tbody>
+    {rowData?.products?.map((prod, i) => (
+      <tr key={i}>
+        <td style={{ padding: '8px 10px', border: '1px solid #ccc' }}>{prod.productName}</td>
+        <td style={{ padding: '8px 10px', border: '1px solid #ccc' }}>{prod.productQuantity}</td>
+        <td style={{ padding: '8px 10px', border: '1px solid #ccc' }}>{prod.product_price}</td>
+      </tr>
+    ))}
+    <tr>
+      <td style={{ padding: '8px 10px', border: '1px solid #ccc' }} colSpan={2}>
+        Total:
+      </td>
+      <td style={{ padding: '8px 10px', border: '1px solid #ccc' }}>{rowData?.total_price} TND</td>
+    </tr>
+  </tbody>
+</table>
+
+      </div>
+      <hr className="bill-divider" />
+      <div className="bill-footer">
+     <div className='row' style={{display:"flex",justifyContent:"flex-end"}}> 
+      <div className='col-4'>
+      <h4>Cachet et Signature</h4>
+      </div>
+     </div>
       </div>
     </div>
   );

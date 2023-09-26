@@ -65,6 +65,7 @@ const ProductDetails = () => {
   useEffect(() => {
     const user_id = localStorage.getItem('id');
     dispatch(loadUser(user_id));
+    
   }, [dispatch]);
 
   const fetchImages = () => {
@@ -79,7 +80,6 @@ const ProductDetails = () => {
               (image) => image.product_image === principalImage
             )
           ) {
-            setPrincipalImage(product?.product_image);
           }
         }
       })
@@ -155,6 +155,8 @@ const ProductDetails = () => {
       // Handle the successful review submission, e.g., show a success message
     }
     dispatch(getProductDetails(productId));
+    setPrincipalImage(product?.product_image);
+
     fetchImages();
   }, [dispatch, productId, error, reviewError, success]);
 
@@ -192,7 +194,7 @@ const ProductDetails = () => {
                     <img
                       draggable="false"
                       className="w-full h-80 object-contain transform hover:scale-110 transition-transform duration-150 ease-out"
-                      src={principalImage || product?.product_image}
+                      src={product?.product_image ||principalImage}
                       alt={product?.product_name}
                     />
                     <div

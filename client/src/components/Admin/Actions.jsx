@@ -27,7 +27,12 @@ const Actions = ({ id, deleteHandler, name, editRoute, rowData }) => {
         <!DOCTYPE html>
         <html>
         <head>
-          <title>ELECTROZAYN - BON DE LIVRAISON</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#000000" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css
+        ">
+          <title>ELECTROZAYN</title>
         </head>
         <body>
           ${contentToPrint.outerHTML}
