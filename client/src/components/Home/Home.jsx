@@ -38,16 +38,7 @@ const Home = () => {
   });
   return (
     <>
-      <MetaData title="Electrozayn - Le monde des composants électronique et de l'électronique Tunisie"/>
-      <Categories />
-      <main className="flex flex-col gap-3 px-2 mt-5 sm:mt-2">
-        <Banner />
-        <DealSlider title={"nouveaux produits".toUpperCase()} products={newProducts}/>
-        <DealSlider title={"TROTTINETTE ET VELO ELECTRIQUE"}  products={TrotinetteProds}/>
-        <DealSlider title={"PROMOTION"}  products={ledProd}/>
-        {/* <DealSlider title={"NOS LED"} products={ledProducts}/> */}
-        <DealSlider title={"NOS PRODUITS"} products={products} />
-        {products.map((product) => {
+     {products.map((product) => {
           const structuredData = {
             "@context": "http://schema.org",
             "@type": "Product",
@@ -58,16 +49,23 @@ const Home = () => {
               "@type": "Offer",
               "priceCurrency": "TND",
               "price": product.Promo_price>0?product.Promo_price:product.Origin_price,
-              "availability": product.stockquantity>3 ? "http://schema.org/InStock" : "http://schema.org/OutOfStock"
+              "availability": product.stockquantity>3 ? <span style="color:green" >EnStock</span> : <span style="color:red" >OutOfStock</span>
             }
           };
 
           return (
-            <script type="application/ld+json" key={product.id}>
-              {JSON.stringify(structuredData)}
-            </script>
+            <MetaData title={JSON.stringify(structuredData)}/>
           );
         })}
+      <Categories />
+      <main className="flex flex-col gap-3 px-2 mt-5 sm:mt-2">
+        <Banner />
+        <DealSlider title={"nouveaux produits".toUpperCase()} products={newProducts}/>
+        <DealSlider title={"TROTTINETTE ET VELO ELECTRIQUE"}  products={TrotinetteProds}/>
+        <DealSlider title={"PROMOTION"}  products={ledProd}/>
+        {/* <DealSlider title={"NOS LED"} products={ledProducts}/> */}
+        <DealSlider title={"NOS PRODUITS"} products={products} />
+       
       </main>
     </>
   );
