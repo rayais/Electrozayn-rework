@@ -55,13 +55,21 @@ const ProductDetails = () => {
   const { wishlistItems } = useSelector((state) => state.wishlist);
 
   const [images, setImages] = useState([]);
-  const [principalImage, setPrincipalImage] = useState(product?.product_image);
+  const [principalImage, setPrincipalImage] = useState("");
   const [thumbnailImages, setThumbnailImages] = useState([]);
   const [open, setOpen] = useState(false);
   const [imageIndex, setImageIndex] = useState(0);
 
   const user = useSelector((state) => state.user.user);
-
+  const updatePrincipalImage = () => {
+    if (product) {
+      setPrincipalImage(product.product_image);
+    }
+  };
+  useEffect(() => {
+    updatePrincipalImage(); // Update the initial principalImage state
+  }, [product]); // Trigger the effect when the product data changes
+  
   useEffect(() => {
     const user_id = localStorage.getItem('id');
     dispatch(loadUser(user_id));
@@ -155,7 +163,7 @@ const ProductDetails = () => {
       // Handle the successful review submission, e.g., show a success message
     }
     dispatch(getProductDetails(productId));
-    setPrincipalImage(product?.product_image);
+    
 
     fetchImages();
   }, [dispatch, productId, error, reviewError, success]);
@@ -194,7 +202,7 @@ const ProductDetails = () => {
                     <img
                       draggable="false"
                       className="w-full h-80 object-contain transform hover:scale-110 transition-transform duration-150 ease-out"
-                      src={product?.product_image ||principalImage}
+                      src={principalImage}
                       alt={product?.product_name}
                     />
                     <div

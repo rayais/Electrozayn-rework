@@ -15,7 +15,6 @@ const Product = ({id, product_image, product_name, offer, tag, Origin_price, Pro
     }
     const handelnavigate=(id)=>{
       navigate(`/product/${id}`)
-      window.location.reload()
     }
 
     return (
@@ -29,6 +28,7 @@ const Product = ({id, product_image, product_name, offer, tag, Origin_price, Pro
             {/* <span className="text-gray-500 line-through text-xs">TND {Origin_price? Origin_price.toLocaleString() : Promo_price.toLocaleString()}</span> */}
             </div>
             <div className="flex flex-col items-center cursor-pointer ">
+                <label htmlFor="">Price: </label>
             <span className=' font-bold text-red-500 '>TND {Promo_price? Promo_price.toLocaleString() : Origin_price.toLocaleString()}</span>
             <ShoppingCartIcon className='hover:text-primary-blue' onClick={addToCartHandler}/>
             </div>
