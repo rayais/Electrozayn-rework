@@ -79,7 +79,6 @@ export const loginUser = (Email, Password) => async (dispatch) => {
 
 // Register User
 export const registerUser = (userData) => async (dispatch) => {
-    console.log(userData)
     try {
 
 
@@ -89,7 +88,6 @@ export const registerUser = (userData) => async (dispatch) => {
 
         const { data } = await axios.post(
             'https://www.electrozayn.com/api/Create_user/electrozayn',userData);
-console.log(data)
         dispatch({
             type: REGISTER_USER_SUCCESS,
             payload: data,
@@ -99,7 +97,6 @@ console.log(data)
         localStorage.setItem("id", data?.user_id);
         
     } catch (error) {
-        console.log(error)
         dispatch({
             type: REGISTER_USER_FAIL,
             payload: error.response.data.message,
@@ -136,8 +133,12 @@ export const loadUser = (user_id) => async (dispatch) => {
 export const updateuser = (id,userData) => async (dispatch) => {
 
     try {
- await axios.put('http://localhost:5500/api/update_user/'+id,userData)
- .then((res)=>(console.log(res.data)))
+ await axios.put('https://www.electrozayn.com/update_user/'+id,userData)
+ .then((res)=>{
+    if(res.data.message==='User updated successfully.'){
+        loadUser(id)
+    }
+ })
     } catch (error) {
         dispatch({
             type: LOAD_USER_FAIL,

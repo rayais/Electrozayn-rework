@@ -38,25 +38,7 @@ const Home = () => {
   });
   return (
     <>
-     {products.map((product) => {
-          const structuredData = {
-            "@context": "http://schema.org",
-            "@type": "Product",
-            "name": product.product_name,
-            "description": product.description,
-            "image": product.product_image,
-            "offers": {
-              "@type": "Offer",
-              "priceCurrency": "TND",
-              "price": product.Promo_price>0?product.Promo_price:product.Origin_price,
-              "availability": product.stockquantity>3 ? <span style="color:green" >EnStock</span> : <span style="color:red" >OutOfStock</span>
-            }
-          };
-
-          return (
-            <MetaData title={JSON.stringify(structuredData)}/>
-          );
-        })}
+     <MetaData title="Electrozayn - Le monde des composants électronique et de l'électronique Tunisie" />
       <Categories />
       <main className="flex flex-col gap-3 px-2 mt-5 sm:mt-2">
         <Banner />

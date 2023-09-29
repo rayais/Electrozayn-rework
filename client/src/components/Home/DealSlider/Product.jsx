@@ -11,7 +11,6 @@ const Product = ({id, product_image, product_name, offer, tag, Origin_price, Pro
     const addToCartHandler = () => {
         dispatch(addItemsToCart(id));
         enqueueSnackbar("Produit ajouté au panier avec succès", { variant: "success" });
-        console.log(true)
     }
     const handelnavigate=(id)=>{
       navigate(`/product/${id}`)

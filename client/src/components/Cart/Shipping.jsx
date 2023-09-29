@@ -53,7 +53,6 @@ const Shipping = ({user}) => {
 
     return (
         <>
-        {console.log(user)}
             <MetaData title="Electrozayn - Le monde des composants électronique et de l'électronique Tunisie" />
             <main className="w-full mt-20">
 
