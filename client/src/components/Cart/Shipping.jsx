@@ -21,13 +21,13 @@ const Shipping = ({user}) => {
     const { cartItems } = useSelector((state) => state.cart);
     const { shippingInfo } = useSelector((state) => state.cart);
 
-    const [address, setAddress] = useState();
+    const [address, setAddress] = useState(user?.Address);
     const [email, setEmail] = useState(user?.Email);
     const [country, setCountry] = useState("");
     const [state, setState] = useState("");
     const [pincode, setPincode] = useState(null);
     const [phoneNo, setPhoneNo] = useState(user?.PhoneNumber);
-
+    const [Password,setPassword]=useState('')
     const itemPrice = cartItems.reduce((total, item) => {
         const price = item.cuttedPrice !== undefined ? item.cuttedPrice : item.price;
         return total + price;
@@ -40,12 +40,18 @@ const Shipping = ({user}) => {
             enqueueSnackbar("Invalid Phone Number", { variant: "error" });
             return;
         }
+        if(Password.length>0){
+            dispatch(registerUser({Email:email,PhoneNumber:phoneNo,Password:Password,Address:address,Zip:pincode,country:country}))
+        }else{
+            dispatch(updateProfile(user?.id,{Email:email,PhoneNumber:phoneNo,Password:Password,Address:address,Zip:pincode,country:country}))
+        }
         dispatch(saveShippingInfo({ address, country, state, pincode, phoneNo }));
         navigate("/order/confirm");
     }
 
     return (
         <>
+        {console.log(user)}
             <MetaData title="Electrozayn - Le monde des composants électronique et de l'électronique Tunisie" />
             <main className="w-full mt-20">
 
@@ -58,7 +64,7 @@ const Shipping = ({user}) => {
                         <Stepper activeStep={1} user={user}>
                             <div className="w-full bg-white">
 
-                                <form onSubmit={shippingSubmit} autoComplete="off" className="flex flex-col justify-start gap-3 w-full sm:w-3/4 mx-1 sm:mx-8 my-4">
+                                <form  autoComplete="off" className="flex flex-col justify-start gap-3 w-full sm:w-3/4 mx-1 sm:mx-8 my-4">
 
                                     <TextField
                                         value={address}
@@ -71,12 +77,20 @@ const Shipping = ({user}) => {
 
                                     <TextField
                                         value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
                                         fullWidth
                                         label="Email"
                                         variant="outlined"
                                         required
                                     />
-
+                                      {!user?<TextField
+                                        value={Password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                        fullWidth
+                                        label="Email"
+                                        variant="outlined"
+                                        required
+                                    />:null}
                                     <div className="flex gap-6">
                                         <TextField
                                             value={pincode}
@@ -109,7 +123,7 @@ const Shipping = ({user}) => {
                                     </div>
 
 
-                                    <button type="submit" className="bg-primary-orange w-full sm:w-1/3 my-2 py-3.5 text-sm font-medium text-white shadow hover:shadow-lg rounded-sm uppercase outline-none">CONTINUER</button>
+                                    <button onClick={(e)=>shippingSubmit(e)} type="button" className="bg-primary-orange w-full sm:w-1/3 my-2 py-3.5 text-sm font-medium text-white shadow hover:shadow-lg rounded-sm uppercase outline-none">CONTINUER</button>
                                 </form>
                             </div>
                         </Stepper>

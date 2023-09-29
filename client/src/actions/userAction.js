@@ -132,6 +132,18 @@ export const loadUser = (user_id) => async (dispatch) => {
         });
     }
 };
+export const updateuser = (id,userData) => async (dispatch) => {
+
+    try {
+ await axios.get('https://www.electrozayn.com/api/update_user/'+id,userData)
+ .then((res)=>(console.log(res.data)))
+    } catch (error) {
+        dispatch({
+            type: LOAD_USER_FAIL,
+            payload: "VEUILLEZ VOUS CONNECTER !!",
+        });
+    }
+};
 
 // Logout User
 export const logoutUser = () => async (dispatch) => {

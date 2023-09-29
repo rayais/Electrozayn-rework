@@ -38,6 +38,7 @@ import Wishlist from './components/Wishlist/Wishlist';
 import NotFound from './components/NotFound'
 import Cookies from 'universal-cookie'
 import axios from 'axios';
+import PrivateRoute from './Routes/PrivetRouter';
 
 function App() {
   const dispatch = useDispatch();
@@ -97,15 +98,13 @@ function App() {
 
         {/* order process */}
         <Route path="/shipping" element={
-          <ProtectedRoute>
             <Shipping user= {user}/>
-          </ProtectedRoute>
         } ></Route>
 
         <Route path="/order/confirm" element={
-          <ProtectedRoute>
+          <PrivateRoute>
             <OrderConfirm user={user}/>
-          </ProtectedRoute>
+          </PrivateRoute>
         } ></Route>
 
        
@@ -121,29 +120,27 @@ function App() {
         } ></Route>
 
         <Route path="/orders" element={
-          <ProtectedRoute>
+          <PrivateRoute>
             <MyOrders />
-          </ProtectedRoute>
+          </PrivateRoute>
         }></Route>
 
         
 
         <Route path="/account" element={
-          <ProtectedRoute>
+          <PrivateRoute>
             <Account />
-          </ProtectedRoute>
+          </PrivateRoute>
         } ></Route>
 
         <Route path="/account/update" element={
-          <ProtectedRoute>
+          <PrivateRoute>
             <UpdateProfile />
-          </ProtectedRoute>
+          </PrivateRoute>
         } ></Route>
 
         <Route path="/password/update" element={
-          <ProtectedRoute>
             <UpdatePassword />
-          </ProtectedRoute>
         } ></Route>
 
         <Route path="/password/forgot" element={<ForgotPassword />} />
@@ -151,9 +148,9 @@ function App() {
         <Route path="/password/reset/:token" element={<ResetPassword />} />
 
         <Route path="/wishlist" element={
-          <ProtectedRoute>
+          <PrivateRoute>
             <Wishlist />
-          </ProtectedRoute>
+          </PrivateRoute>
         } ></Route>
 
         <Route path="/admin/dashboard" element={
