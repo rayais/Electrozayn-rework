@@ -93,6 +93,7 @@ function App() {
         <Route path="/product/:productId" element={<ProductDetails />} />
         <Route path="/products/:title" element={<Products />} />
         <Route path="/products/:keyword" element={<Products />} />
+        <Route path="/products" element={<Products />} />
 
         <Route path="/cart" element={<Cart />} />
 
@@ -102,9 +103,9 @@ function App() {
         } ></Route>
 
         <Route path="/order/confirm" element={
-          <PrivateRoute>
+          <>
             <OrderConfirm user={user}/>
-          </PrivateRoute>
+          </>
         } ></Route>
 
        

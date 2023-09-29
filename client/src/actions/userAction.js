@@ -59,6 +59,7 @@ export const loginUser = (Email, Password) => async (dispatch) => {
 
             localStorage.setItem("token", data.session);
             localStorage.setItem("id", data.user_id);
+            window.location.reload()
         } else {
             // Unsuccessful login
             dispatch({
@@ -135,7 +136,7 @@ export const loadUser = (user_id) => async (dispatch) => {
 export const updateuser = (id,userData) => async (dispatch) => {
 
     try {
- await axios.get('https://www.electrozayn.com/api/update_user/'+id,userData)
+ await axios.put('http://localhost:5500/api/update_user/'+id,userData)
  .then((res)=>(console.log(res.data)))
     } catch (error) {
         dispatch({

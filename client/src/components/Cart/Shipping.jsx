@@ -12,6 +12,7 @@ import { saveShippingInfo } from '../../actions/cartAction';
 import { useNavigate } from 'react-router-dom';
 import MetaData from '../Layouts/MetaData';
 import states from '../../utils/states';
+import { registerUser, updateuser } from '../../actions/userAction';
 
 const Shipping = ({user}) => {
 
@@ -23,10 +24,11 @@ const Shipping = ({user}) => {
 
     const [address, setAddress] = useState(user?.Address);
     const [email, setEmail] = useState(user?.Email);
-    const [country, setCountry] = useState("");
+    const [country, setCountry] = useState(user?.country);
     const [state, setState] = useState("");
-    const [pincode, setPincode] = useState(null);
+    const [pincode, setPincode] = useState(user?.Zip);
     const [phoneNo, setPhoneNo] = useState(user?.PhoneNumber);
+    const [FirstName,setFirstName]=useState(user?.FirstName)
     const [Password,setPassword]=useState('')
     const itemPrice = cartItems.reduce((total, item) => {
         const price = item.cuttedPrice !== undefined ? item.cuttedPrice : item.price;
@@ -41,9 +43,9 @@ const Shipping = ({user}) => {
             return;
         }
         if(Password.length>0){
-            dispatch(registerUser({Email:email,PhoneNumber:phoneNo,Password:Password,Address:address,Zip:pincode,country:country}))
+            dispatch(registerUser({FirstName:FirstName, Email:email,PhoneNumber:phoneNo,Password:Password,Address:address,Zip:pincode,country:country}))
         }else{
-            dispatch(updateProfile(user?.id,{Email:email,PhoneNumber:phoneNo,Password:Password,Address:address,Zip:pincode,country:country}))
+            dispatch(updateuser(user?.id,{FirstName:FirstName,Email:email,PhoneNumber:phoneNo,Password:Password,Address:address,Zip:pincode,country:country}))
         }
         dispatch(saveShippingInfo({ address, country, state, pincode, phoneNo }));
         navigate("/order/confirm");
@@ -65,7 +67,14 @@ const Shipping = ({user}) => {
                             <div className="w-full bg-white">
 
                                 <form  autoComplete="off" className="flex flex-col justify-start gap-3 w-full sm:w-3/4 mx-1 sm:mx-8 my-4">
-
+                                <TextField
+                                        value={FirstName}
+                                        onChange={(e) => setFirstName(e.target.value)}
+                                        fullWidth
+                                        label="Nom"
+                                        variant="outlined"
+                                        required
+                                    />
                                     <TextField
                                         value={address}
                                         onChange={(e) => setAddress(e.target.value)}
@@ -87,9 +96,10 @@ const Shipping = ({user}) => {
                                         value={Password}
                                         onChange={(e) => setPassword(e.target.value)}
                                         fullWidth
-                                        label="Email"
+                                        label="Password"
                                         variant="outlined"
                                         required
+                                        type="password"
                                     />:null}
                                     <div className="flex gap-6">
                                         <TextField

@@ -13,7 +13,7 @@ const Cart = () => {
     const { saveForLaterItems } = useSelector((state) => state.saveForLater);
 
     const placeOrderHandler = () => {
-        navigate('/login?redirect=shipping');
+        navigate('/shipping');
     }
 
     return (

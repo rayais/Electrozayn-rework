@@ -101,14 +101,15 @@ newsletterUser:((req,res)=>{
    }) 
 }),
 updateUser: (req, res) => {
-  const { FirstName, LastName, Email, Address, phoneNumber, country, Zip, City } = req.body;
-
+  const { FirstName, LastName, Email, Address, PhoneNumber, country, Zip, City } = req.body;
+console.log(req.body)
   // Construct the SQL query to update user information
-  const query = `UPDATE user SET FirstName="${FirstName}", LastName="${LastName}", Email="${Email}", Address="${Address}", PhoneNumber="${phoneNumber}", country="${country}", Zip="${Zip}", City="${City}" WHERE id=${req.params.id}`;
+  const query = `UPDATE user SET FirstName="${FirstName}", LastName="${LastName}", Email="${Email}", Address="${Address}", PhoneNumber="${PhoneNumber}", country="${country}", Zip="${Zip}" WHERE id=${req.params.id}`;
 
   // Execute the query with user data
   connection.query(query, (error, results) => {
     if (error) {
+      console.log(error)
       res.status(500).json({ error: error });
     } else {
       res.status(200).json({ message: 'User updated successfully.' });
