@@ -16,9 +16,9 @@ module.exports = {
     } = req.body;
     const user_id = req.params.id;
     const validate_add_or_not = false;
-
-    console.log(req.body,"test")
-
+  
+    console.log('test1',req.body,'test2');
+  
     const query = `
       INSERT INTO userorder (validate_add_or_not, FirstName, Email, address, PhoneNumber, country, Zip, total_price, user_id)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
@@ -37,35 +37,34 @@ module.exports = {
         user_id,
       ],
       (err, result) => {
-
         if (err) {
           console.error("Error executing query:", err);
-          res.status(500).send(err);
-        } else {
-          const orderId = result.insertId; // Get the newly inserted order ID
-
-          // Save order items in the order_items table
-          const orderItemsQuery = `
-            INSERT INTO order_items (order_id, product_name, product_quantity, product_price)
-            VALUES ?`;
-          const orderItemsValues = products.map((product) => [
-            orderId,
-            product.name,
-            product.quantity,
-            product.cuttedPrice > 0
-              ? Number(product.cuttedPrice) * Number(product.quantity)
-              : Number(product.price) * Number(product.quantity),
-          ]);
-
-          connection.query(orderItemsQuery, [orderItemsValues], (err) => {
-            if (err) {
-              console.log(err);
-              res.status(500).send(err);
-            } else {
-              res.status(201).send("Order created");
-            }
-          });
+          return res.status(500).send(err); // Send an error response and return to exit the function
         }
+  
+        const orderId = result.insertId; // Get the newly inserted order ID
+  
+        // Save order items in the order_items table
+        const orderItemsQuery = `
+          INSERT INTO order_items (order_id, product_name, product_quantity, product_price)
+          VALUES ?`;
+        const orderItemsValues = products.map((product) => [
+          orderId,
+          product.name,
+          product.quantity,
+          product.cuttedPrice > 0
+            ? Number(product.cuttedPrice) * Number(product.quantity)
+            : Number(product.price) * Number(product.quantity),
+        ]);
+  
+        connection.query(orderItemsQuery, [orderItemsValues], (err) => {
+          if (err) {
+            console.error("Error saving order items:", err);
+            return res.status(500).send(err); // Send an error response and return to exit the function
+          }
+  
+          res.status(201).send("Order created"); // Send a success response
+        });
       }
     );
   }
