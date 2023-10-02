@@ -39,7 +39,7 @@ module.exports = {
       err ? res.status(500).send(err) : res.status(201).send("product updated");
     });
   },
-  updatequantity: (req, res,next) => {
+  updatequantity: (req, res) => {
     const cartItems = req.body.cartItemss; // Correctly parse cart items from req.body
     // Loop through cart items and update the quantity in the database as needed
     cartItems.forEach((cartItem) => {
@@ -48,7 +48,7 @@ module.exports = {
         if (err) {
           res.status(500).send(err);
         } else {
-          next()
+          console.log('done')
         }
       });
     });

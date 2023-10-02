@@ -13,7 +13,7 @@ module.exports = {
       PhoneNumber,
       country,
       Zip,
-      total_price,
+      totalPrice,
       cartItems,
     } = req.body;
     const user_id = req.params.id;
@@ -33,7 +33,7 @@ module.exports = {
         PhoneNumber,
         country,
         Zip,
-        total_price,
+        totalPrice,
         user_id,
       ],
       (err, result) => {
