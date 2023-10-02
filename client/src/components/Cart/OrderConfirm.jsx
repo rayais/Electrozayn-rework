@@ -23,7 +23,7 @@ const OrderConfirm = ({user}) => {
         axios.put(`https://www.electrozayn.com/api/update/quantity`, {
             cartItemss,
           })
-            .then((res) => console.log(res))
+            .then(res)
             .catch((error) => console.error(error));
           
 
