@@ -4,8 +4,71 @@ const { nodmail } = require("./email");
 
 module.exports = {
   CreateOrder: (req, res) => {
-    console.log("#########",req.body,"###########")
-  },
+    console.log("#########", req.body, "###########");
+  
+    const {
+      FirstName,
+      Email,
+      address,
+      PhoneNumber,
+      country,
+      Zip,
+      total_price,
+      products,
+    } = req.body;
+    const user_id = req.params.id;
+    const validate_add_or_not = false;
+  
+    const query = `
+      INSERT INTO userorder (validate_add_or_not, FirstName, Email, address, PhoneNumber, country, Zip, total_price, user_id)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `;
+    connection.query(
+      query,
+      [
+        validate_add_or_not,
+        FirstName,
+        Email,
+        address,
+        PhoneNumber,
+        country,
+        Zip,
+        total_price,
+        user_id,
+      ],
+      (err, result) => {
+        if (err) {
+          console.error("Error executing query:", err);
+          res.status(500).send(err);
+        } else {
+          const orderId = result.insertId; // Get the newly inserted order ID
+  
+          // Save order items in the order_items table
+          const orderItemsQuery = `
+            INSERT INTO order_items (order_id, product_name, product_quantity, product_price)
+            VALUES ?`;
+          const orderItemsValues = products.map((product) => [
+            orderId,
+            product.name,
+            product.quantity,
+            product.cuttedPrice > 0
+              ? Number(product.cuttedPrice) * Number(product.quantity)
+              : Number(product.price) * Number(product.quantity),
+          ]);
+  
+          connection.query(orderItemsQuery, [orderItemsValues], (err) => {
+            if (err) {
+              console.log(err);
+              res.status(500).send(err);
+            } else {
+              res.status(201).send("Order created");
+            }
+          });
+        }
+      }
+    );
+  }
+  ,
   getAllOrder: (req, res) => {
     const query = 'SELECT * FROM userorder';
 

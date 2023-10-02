@@ -40,7 +40,6 @@ module.exports = {
     });
   },
   updatequantity: (req, res) => {
-    console.log(req.body)
     const cartItems = req.body.cartItemss; // Correctly parse cart items from req.body
     // Loop through cart items and update the quantity in the database as needed
     cartItems.forEach((cartItem) => {
