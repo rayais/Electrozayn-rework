@@ -19,6 +19,7 @@ export const newOrder = (order, id) => async (dispatch) => {
           total_price: order.totalPrice,
           products: order.cartItems
         });
+        console.log(data)
 
         dispatch({
             type: NEW_ORDER_SUCCESS,

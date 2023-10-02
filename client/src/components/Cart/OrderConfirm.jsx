@@ -40,8 +40,8 @@ const OrderConfirm = ({user}) => {
         const totalPrice = totalProdPrice + deliveryFee;
 
         const orderData = {
-            FirstName: user?.FirstName,
-            Email: user?.Email,
+            FirstName: shippingInfo.FirstName,
+            Email: shippingInfo.email,
             address: shippingInfo.address,
             PhoneNumber: shippingInfo.phoneNo,
             Zip: shippingInfo.pincode,

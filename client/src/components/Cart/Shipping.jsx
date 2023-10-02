@@ -47,7 +47,7 @@ const Shipping = ({user}) => {
         }else{
             dispatch(updateuser(user?.id,{FirstName:FirstName,Email:email,PhoneNumber:phoneNo,Password:Password,Address:address,Zip:pincode,country:country}))
         }
-        dispatch(saveShippingInfo({ address, country, state, pincode, phoneNo }));
+        dispatch(saveShippingInfo({ FirstName,email, address, country, state, pincode, phoneNo }));
         navigate("/order/confirm");
     }
 
