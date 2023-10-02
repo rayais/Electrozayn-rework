@@ -2,24 +2,14 @@ import axios from "axios";
 import { ALL_ORDERS_FAIL, ALL_ORDERS_REQUEST, ALL_ORDERS_SUCCESS, CLEAR_ERRORS, DELETE_ORDER_FAIL, DELETE_ORDER_REQUEST, DELETE_ORDER_SUCCESS, MY_ORDERS_FAIL, MY_ORDERS_REQUEST, MY_ORDERS_SUCCESS, NEW_ORDER_FAIL, NEW_ORDER_REQUEST, NEW_ORDER_SUCCESS, ORDER_DETAILS_FAIL, ORDER_DETAILS_REQUEST, ORDER_DETAILS_SUCCESS, UPDATE_ORDER_FAIL, UPDATE_ORDER_REQUEST, UPDATE_ORDER_SUCCESS } from "../constants/orderConstants";
 
 // New Order
-export const newOrder = (order, id) => async (dispatch) => {
+export const newOrder = (orderData, id) => async (dispatch) => {
     
     try {
         dispatch({ type: NEW_ORDER_REQUEST });
 
        
 
-        const { data } = await axios.post(`https://www.electrozayn.com/api/create/order/${id}`, {
-            FirstName: order.FirstName,
-          Email: order.Email,
-          PhoneNumber: order.PhoneNumber,
-          address: order.address,
-          country: order.country,
-          Zip: order.Zip,
-          total_price: order.totalPrice,
-          products: order.cartItems
-        });
-        console.log(data)
+        const { data } = await axios.post(`https://www.electrozayn.com/api/create/order/${id}`,orderData);
 
         dispatch({
             type: NEW_ORDER_SUCCESS,

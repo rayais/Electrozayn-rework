@@ -17,7 +17,7 @@ module.exports = {
     const user_id = req.params.id;
     const validate_add_or_not = false;
 
-    console.log(req.body)
+    console.log(req.body,"test")
 
     const query = `
       INSERT INTO userorder (validate_add_or_not, FirstName, Email, address, PhoneNumber, country, Zip, total_price, user_id)
