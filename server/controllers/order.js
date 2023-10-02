@@ -14,7 +14,7 @@ module.exports = {
       country,
       Zip,
       total_price,
-      products,
+      cartItems,
     } = req.body;
     const user_id = req.params.id;
     const validate_add_or_not = false;
@@ -47,7 +47,7 @@ module.exports = {
           const orderItemsQuery = `
             INSERT INTO order_items (order_id, product_name, product_quantity, product_price)
             VALUES ?`;
-          const orderItemsValues = products.map((product) => [
+          const orderItemsValues = cartItems.map((product) => [
             orderId,
             product.name,
             product.quantity,

@@ -43,10 +43,10 @@ module.exports = {
     const cartItems = req.body.cartItemss; // Correctly parse cart items from req.body
     // Loop through cart items and update the quantity in the database as needed
     cartItems.forEach((cartItem) => {
-      console.log(cartItem)
       const query = `UPDATE products SET stockquantity = stockquantity - ${cartItem.quantity} WHERE id = ${cartItem.product}`;
       connection.query(query, (err, result) => {
         if (err) {
+          console.log(err)
           res.status(500).send(err);
         } else {
           res.status(201).send("Quantity Updated");
