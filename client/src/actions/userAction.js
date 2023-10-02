@@ -133,7 +133,7 @@ export const loadUser = (user_id) => async (dispatch) => {
 export const updateuser = (id,userData) => async (dispatch) => {
 
     try {
- await axios.put('https://www.electrozayn.com/update_user/'+id,userData)
+ await axios.put('https://www.electrozayn.com/api/update_user/'+id,userData)
  .then((res)=>{
     console.log(res)
     if(res.data.message==='User updated successfully.'){
