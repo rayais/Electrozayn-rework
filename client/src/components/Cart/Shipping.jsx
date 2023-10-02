@@ -38,7 +38,7 @@ const Shipping = ({user}) => {
     const shippingSubmit = (e) => {
         e.preventDefault();
 
-        if (phoneNo.length < 8 || phoneNo.length > 10) {
+        if (phoneNo.toString().length < 8 || phoneNo.toString().length > 10) {
             enqueueSnackbar("Invalid Phone Number", { variant: "error" });
             return;
         }
