@@ -42,7 +42,7 @@ module.exports = {
           res.status(500).send(err);
         } else {
           const orderId = result.insertId; // Get the newly inserted order ID
-  
+            console.log(orderId)
           // Save order items in the order_items table
           const orderItemsQuery = `
             INSERT INTO order_items (order_id, product_name, product_quantity, product_price)
