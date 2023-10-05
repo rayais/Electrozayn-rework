@@ -1,6 +1,6 @@
 const sessionContrller=require('../controllers/session')
 module.exports={
-    CreateSession: async (req, res, user_id, session) => {
+    CreateSession: async (req, res, user_id,info, session) => {
         try {
             const result = await sessionContrller.post(user_id, session);
             const registerInfo = {
@@ -14,8 +14,8 @@ module.exports={
                 expires: new Date(new Date().getTime() + 86400 * 1000),
                 httpOnly: false,
                 Electrozyne: false
-            }).send({ session, success: true, user_id});
-            console.log({ session, success: true, user_id})
+            }).send({info ,session, success: true, user_id});
+            console.log({ info,session, success: true, user_id})
         } catch (err) {
             console.log(err)
             res.status(500).json({ success: false, error: err.message });

@@ -56,7 +56,6 @@ export const loginUser = (Email, Password) => async (dispatch) => {
                 type: LOGIN_USER_SUCCESS,
                 payload: data,
             });
-
             localStorage.setItem("token", data.session);
             localStorage.setItem("id", data.user_id);
             window.location.reload()

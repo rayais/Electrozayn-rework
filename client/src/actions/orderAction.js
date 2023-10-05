@@ -29,7 +29,7 @@ export const myOrders = (user_id) => async (dispatch) => {
     try {
         dispatch({ type: MY_ORDERS_REQUEST });
 
-        const { data } = await axios.get(`https://www.electrozayn.com/api/order_items`);
+        const { data } = await axios.get(`https://www.electrozayn.com/api/order_items/user`);
 
         dispatch({
             type: MY_ORDERS_SUCCESS,

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { myOrders, clearErrors } from '../../actions/orderAction';
+import { myOrders, clearErrors, getAllOrders } from '../../actions/orderAction';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../Layouts/Loader';
 import { useSnackbar } from 'notistack';
@@ -27,7 +27,7 @@ const MyOrders = () => {
     const [search, setSearch] = useState("");
     const [filteredOrders, setFilteredOrders] = useState([]);
 
-    const { orders, loading, error } = useSelector((state) => state.myOrders);
+    const { orders, loading, error } = useSelector((state) => state.ordersuser);
 
     useEffect(() => {
         if (error) {
@@ -105,7 +105,7 @@ const MyOrders = () => {
     return (
         <>
             <MetaData title="Electrozayn - Le monde des composants électroniques et de l'électronique en Tunisie" />
-
+{console.log(orders)}
             <MinCategory />
             <main className="w-full mt-16 sm:mt-0">
                 <div className="flex gap-3.5 mt-2 sm:mt-6 sm:mx-3 m-auto mb-7">
@@ -168,7 +168,7 @@ const MyOrders = () => {
                                         <p>Edit search or clear all filters</p>
                                     </div>
                                 )}
-                                {orders.filter((el)=>el.user_id===(Number(user_id))).map((order) => {
+                                {orders.map((order) => {
                                     return (
                                  <>
                                     <OrderItem order={order} />

@@ -32,7 +32,7 @@ export const newOrderReducer = (state = {}, { type, payload }) => {
     }
 };
 
-export const myOrdersReducer = (state = { orders: [] }, { type, payload }) => {
+export const myOrdersReducer = (state = { ordersuser: [] }, { type, payload }) => {
     switch (type) {
         case MY_ORDERS_REQUEST:
             return {
@@ -41,7 +41,7 @@ export const myOrdersReducer = (state = { orders: [] }, { type, payload }) => {
         case MY_ORDERS_SUCCESS:
             return {
                 loading: false,
-                orders: payload,
+                ordersuser: payload,
             };
         case MY_ORDERS_FAIL:
             return {
