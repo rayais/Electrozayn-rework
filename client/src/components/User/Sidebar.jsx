@@ -66,6 +66,11 @@ const Sidebar = ({ activeTab }) => {
                         Se déconnecter
                         <span><ChevronRightIcon /></span>
                     </div>
+                    <Link to='/orders' className="flex w-full justify-between font-medium text-gray-500 hover:text-primary-blue cursor-pointer" >
+                         <span className="text-primary-blue" ><DashboardIcon sx={{ fontSize: "18px" }} /></span>
+                    mes commandes
+                        {/* <span><ChevronRightIcon /></span> */}
+             </Link >
                 </div>
                 {/* <!-- logout tab --> */}
 

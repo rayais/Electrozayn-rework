@@ -39,7 +39,7 @@ import NotFound from './components/NotFound'
 import Cookies from 'universal-cookie'
 import axios from 'axios';
 import PrivateRoute from './Routes/PrivetRouter';
-
+import PrivetUserRouter from './Routes/PrivetUserRouter'
 function App() {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
@@ -119,11 +119,11 @@ function App() {
             <OrderStatus />
           </ProtectedRoute>
         } ></Route>
-
+         
         <Route path="/orders" element={
-          <PrivateRoute>
+          <PrivetUserRouter>
             <MyOrders />
-          </PrivateRoute>
+          </PrivetUserRouter>
         }></Route>
 
         

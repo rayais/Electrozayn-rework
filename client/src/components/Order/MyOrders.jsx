@@ -18,6 +18,7 @@ const ordertime = [dt.getMonth(), dt.getFullYear() - 1, dt.getFullYear() - 2];
 
 const MyOrders = () => {
     const user_id = localStorage.getItem('id')
+
     const dispatch = useDispatch();
     const { enqueueSnackbar } = useSnackbar();
 
@@ -40,8 +41,7 @@ const MyOrders = () => {
         if (loading === false) {
             setFilteredOrders(orders);
         }
-    }, [loading, orders]);
-
+    }, [dispatch, loading, orders]);
 
     useEffect(() => {
         setSearch("");
@@ -93,6 +93,7 @@ const MyOrders = () => {
             orderItems: el.orderItems?.filter((order) =>
                 order.name.toLowerCase().includes(search.toLowerCase()))
         }));
+        console.log(arr)
         setFilteredOrders(arr);
     }
 
@@ -103,31 +104,19 @@ const MyOrders = () => {
 
     return (
         <>
-            <MetaData title="Electrozayn - Le monde des composants électronique et de l'électronique Tunisie" />
+            <MetaData title="Electrozayn - Le monde des composants électroniques et de l'électronique en Tunisie" />
 
             <MinCategory />
             <main className="w-full mt-16 sm:mt-0">
-
-                {/* <!-- row --> */}
                 <div className="flex gap-3.5 mt-2 sm:mt-6 sm:mx-3 m-auto mb-7">
-
-                    {/* <!-- sidebar column  --> */}
                     <div className="hidden sm:flex flex-col w-1/5 px-1">
-
-                        {/* <!-- nav tiles --> */}
                         <div className="flex flex-col bg-white rounded-sm shadow">
-
-                            {/* <!-- filters header --> */}
                             <div className="flex items-center justify-between gap-5 px-4 py-2 border-b">
                                 <p className="text-lg font-medium">Filters</p>
                                 <span onClick={clearFilters} className="text-blue-600 font-medium text-sm uppercase cursor-pointer hover:text-blue-700">clear all</span>
                             </div>
-
-                            {/* <!-- order status checkboxes --> */}
                             <div className="flex flex-col py-3 text-sm">
                                 <span className="font-medium px-4">ORDER STATUS</span>
-
-                                {/* <!-- checkboxes --> */}
                                 <div className="flex flex-col gap-3 px-4 mt-1 pb-3 border-b">
                                     <FormControl>
                                         <RadioGroup
@@ -142,16 +131,9 @@ const MyOrders = () => {
                                         </RadioGroup>
                                     </FormControl>
                                 </div>
-                                {/* <!-- checkboxes --> */}
-
                             </div>
-                            {/* <!-- order status checkboxes --> */}
-
-                            {/* <!-- order time checkboxes --> */}
                             <div className="flex flex-col pb-2 text-sm">
                                 <span className="font-medium px-4">ORDER TIME</span>
-
-                                {/* <!-- checkboxes --> */}
                                 <div className="flex flex-col gap-3 mt-1 px-4 pb-3">
                                     <FormControl>
                                         <RadioGroup
@@ -166,24 +148,12 @@ const MyOrders = () => {
                                         </RadioGroup>
                                     </FormControl>
                                 </div>
-                                {/* <!-- checkboxes --> */}
-
                             </div>
-                            {/* <!-- order time checkboxes --> */}
-
                         </div>
-                        {/* <!-- nav tiles --> */}
-
                     </div>
-                    {/* <!-- sidebar column  --> */}
-
-                    {/* <!-- orders column --> */}
                     <div className="flex-1">
-
                         {loading ? <Loader /> : (
                             <div className="flex flex-col gap-3 sm:mr-4 overflow-hidden">
-
-                                {/* <!-- searchbar --> */}
                                 <form onSubmit={searchOrders} className="flex items-center justify-between mx-1 sm:mx-0 sm:w-10/12 bg-white border rounded hover:shadow">
                                     <input value={search} onChange={(e) => setSearch(e.target.value)} type="search" name="search" placeholder="Search your orders here" className="p-2 text-sm outline-none flex-1 rounded-l" />
                                     <button type="submit" className="h-full text-sm px-1 sm:px-4 py-2.5 text-white bg-primary-blue hover:bg-blue-600 rounded-r flex items-center gap-1">
@@ -191,34 +161,25 @@ const MyOrders = () => {
                                         Search Orders
                                     </button>
                                 </form>
-                                {/* <!-- searchbar --> */}
-
-                                {orders && filteredOrders.length === 0 && (
+                                {orders === 0 && (
                                     <div className="flex items-center flex-col gap-2 p-8 bg-white">
                                         <img draggable="false" src="https://rukminim1.flixcart.com/www/100/100/promos/23/08/2020/c5f14d2a-2431-4a36-b6cb-8b5b5e283d4f.png" alt="Empty Orders" />
                                         <span className="text-lg font-medium">Sorry, no results found</span>
                                         <p>Edit search or clear all filters</p>
                                     </div>
                                 )}
-
-                                {orders && filteredOrders.map((order) => {
-
-                                    const { _id, orderStatus, orderItems, createdAt, deliveredAt } = order;
-
+                                {orders.filter((el)=>el.user_id===(Number(user_id))).map((order) => {
                                     return (
-                                        orderItems.map((item, index) => (
-                                            <OrderItem {...item} key={index} orderId={_id} orderStatus={orderStatus} createdAt={createdAt} deliveredAt={deliveredAt} />
-                                        ))
+                                 <>
+                                    <OrderItem order={order} />
+                                 </>
+                                        
                                     )
                                 }).reverse()}
                             </div>
                         )}
-
                     </div>
-                    {/* <!-- orders column --> */}
                 </div>
-                {/* <!-- row --> */}
-
             </main>
         </>
     );

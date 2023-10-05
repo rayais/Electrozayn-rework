@@ -45,7 +45,11 @@ const PrimaryDropDownMenu = ({ setTogglePrimaryDropDown, role }) => {
                 <span className="text-primary-blue"><PowerSettingsNewIcon sx={{ fontSize: "18px" }} /></span>
                 Se déconnecter
             </div>
-
+            <Link className="pl-3 py-3.5 border-b flex gap-3 items-center hover:bg-gray-50 rounded-t" to="/orders" onClick={() => setTogglePrimaryDropDown(false)}>
+                    <span className="text-primary-blue" ><DashboardIcon sx={{ fontSize: "18px" }} /></span>
+                    Mes commandes
+                </Link>
+        
             <div className="absolute right-1/2 -top-2.5">
                 <div className="arrow_down"></div>
             </div>

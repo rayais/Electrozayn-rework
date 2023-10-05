@@ -44,7 +44,7 @@ const footerLinks = [
     links: [
       {
         name: "Facebook",
-        redirect: "https://www.facebook.com/profile.php?id=100094658071800",
+        redirect: "https://www.facebook.com/profile.php?id=61551466563794",
         image: <img src={Facebook} alt="Facebook" className="social-icon"/>,
       },
       {
